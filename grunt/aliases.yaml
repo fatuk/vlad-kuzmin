@@ -1,0 +1,6 @@
+default:
+  - 'less'
+  - 'autoprefixer'
+  - 'uglify'
+  - 'connect'
+  - 'watch'
