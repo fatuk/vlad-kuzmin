@@ -1,12 +1,15 @@
 module.exports = {
 	dist: {
 		options: {
-			sourceMap: true
+			sourceMap: false
 		},
 		files: {
 			'vendors/plugins.min.js': [
 				'bower_components/jquery/dist/jquery.js',
-				'bower_components/WOW/dist/wow.js'
+				'bower_components/WOW/dist/wow.js',
+				'bower_components/mustache/mustache.js',
+				'bower_components/underscore/underscore.js',
+				'bower_components/backbone/backbone.js'
 			]
 		}
 	}
