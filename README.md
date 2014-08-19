@@ -1,4 +1,4 @@
-# Vlad Kuz'min - dancer's personal page 
+Vlad Kuz'min - dancer's personal page 
+================
 
 Static prototype
-================
