@@ -22,5 +22,9 @@ module.exports = {
 	plugins: {
 		files: 'bower_components/**',
 		tasks: ['uglify']
+	},
+	mustache: {
+		files: ['templates/**', 'json/*.json'],
+		tasks: ['mustache_render']
 	}
 };
