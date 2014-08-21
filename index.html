@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>Влад Кузьмин</title>
 	<link rel="stylesheet" href="css/main.css">
 	<!--[if lt IE 9]>
@@ -11,6 +10,7 @@
 	<![endif]-->
 </head>
 <body>
+	<div class="wrapper js-frame">
 <header class="site-header">
 	<div class="container">
 		<table class="main-menu">
@@ -60,36 +60,36 @@
 </div>
 <div class="arrow arrow_right js-slideArrowRight">
 	>
-</div>	<main class="main-content">
-<section class="section section_home js-section" id="home">
+</div>		<main class="main-content js-framesContainer">
+<section class="section section_home js-section" data-frame="home">
 	<div class="container">
 		home
 	</div>
-</section><section class="section section_resume js-section" id="resume">
+</section><section class="section section_resume js-section" data-frame="resume">
 	<div class="container">
 		resume
 	</div>
-</section><section class="section section_show js-section" id="show">
+</section><section class="section section_show js-section" data-frame="show">
 	<div class="container">
 		show
 	</div>
-</section><section class="section section_mirazh js-section" id="mirazh">
+</section><section class="section section_mirazh js-section" data-frame="mirazh">
 	<div class="container">
 		mirazh
 	</div>
-</section><section class="section section_gallery js-section" id="gallery">
+</section><section class="section section_gallery js-section" data-frame="gallery">
 	<div class="container">
 		gallery
 	</div>
-</section><section class="section section_news js-section" id="news">
+</section><section class="section section_news js-section" data-frame="news">
 	<div class="container">
 		news
 	</div>
-</section><section class="section section_contacts js-section" id="contacts">
+</section><section class="section section_contacts js-section" data-frame="contacts">
 	<div class="container">
 		contacts
 	</div>
-</section>	</main>
+</section>		</main>
 <footer class="site-footer">
 	<div class="container">
 		<ul class="site-footer__list">
@@ -127,7 +127,8 @@
 			</li>
 		</ul>
 	</div>
-</footer>	<script src="vendors/plugins.min.js"></script>
+</footer>	</div>
+	<script src="vendors/plugins.min.js"></script>
 	<script src="js/main.js"></script>
 </body>
 </html>

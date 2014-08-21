@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>Влад Кузьмин</title>
 	<link rel="stylesheet" href="css/main.css">
 	<!--[if lt IE 9]>
@@ -11,18 +10,20 @@
 	<![endif]-->
 </head>
 <body>
-	{{>header}}
-	{{>arrows}}
-	<main class="main-content">
-		{{>home}}
-		{{>resume}}
-		{{>show}}
-		{{>mirazh}}
-		{{>gallery}}
-		{{>news}}
-		{{>contacts}}
-	</main>
-	{{>footer}}
+	<div class="wrapper js-frame">
+		{{>header}}
+		{{>arrows}}
+		<main class="main-content js-framesContainer">
+			{{>home}}
+			{{>resume}}
+			{{>show}}
+			{{>mirazh}}
+			{{>gallery}}
+			{{>news}}
+			{{>contacts}}
+		</main>
+		{{>footer}}
+	</div>
 	<script src="vendors/plugins.min.js"></script>
 	<script src="js/main.js"></script>
 </body>

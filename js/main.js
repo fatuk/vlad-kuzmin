@@ -35,37 +35,62 @@ $(function() {
 		routeCounter: 0,
 		events: {
 			'click .js-slideArrowLeft': 'prevPage',
-			'click .js-slideArrowRight': 'nextPage'
+			'click .js-slideArrowRight': 'nextPage',
+			'keyup': 'arrowSlide'
 		},
-		resetRoute: function() {
-			router.navigate(App.Routes[this.routeCounter], {
+		frameWidth: 0,
+		frameHeight: 0,
+		framesCount: 0,
+		currentFrame: 0,
+		getFramesInfo: function() {
+			var $window = $(window);
+			this.frameWidth = $window.width() >= 940 ? $window.width() : 940;
+			this.frameHeight = $window.height();
+			this.framesCount = this.$('.js-section').length;
+		},
+		initialize: function() {
+			this.getFramesInfo();
+			this.$('.js-framesContainer').css({
+				'width': this.frameWidth * this.framesCount,
+				'height': this.frameHeight
+			});
+			this.$('.js-section, .js-frame').css({
+				'width': this.frameWidth,
+				'height': this.frameHeight
+			});
+		},
+		setRoute: function(id) {
+			router.navigate(App.Routes[id], {
 				trigger: true
 			});
 		},
-		prevPage: function() {
-			if (this.routeCounter < App.Routes.length) {
-				this.resetRoute();
-				this.routeCounter--;
-			} else {
-				this.routeCounter = 0;
-				this.routeCounter--;
-				this.resetRoute();
+		arrowSlide: function(e) {
+			switch (e.keyCode) {
+				case 37:
+					this.prevPage();
+					break;
+				case 39:
+					this.nextPage();
+					break;
 			}
-			console.log(this.routeCounter, App.Routes.length);
+		},
+		prevPage: function() {
+			this.currentFrame--;
+			if (this.currentFrame >= 0) {
+				router.setActiveFrame(this.currentFrame);
+			} else {
+				this.currentFrame = this.framesCount - 1;
+				router.setActiveFrame(this.currentFrame);
+			}
 		},
 		nextPage: function() {
-			if (this.routeCounter < App.Routes.length) {
-				this.resetRoute();
-				this.routeCounter++;
+			this.currentFrame++;
+			if (this.currentFrame < this.framesCount) {
+				router.setActiveFrame(this.currentFrame);
 			} else {
-				this.routeCounter = 0;
-				this.routeCounter++;
-				this.resetRoute();
+				this.currentFrame = 0;
+				router.setActiveFrame(this.currentFrame);
 			}
-			console.log(this.routeCounter, App.Routes.length);
-		},
-		initialize: function() {
-
 		}
 	});
 
@@ -86,46 +111,43 @@ $(function() {
 			'news': 'news',
 			'contacts': 'contacts'
 		},
-		fadeInTiming: 1000,
-		fadeOutTiming: 500,
-		reset: function() {
-			appView.$('.js-section').fadeOut(this.fadeOutTiming);
+		activeFrame: 0,
+		setActiveFrame: function(frame) {
 			appView.$('.js-menuLink').removeClass('active');
+			appView.$('.js-framesContainer').css({
+				'left': -frame * appView.frameWidth
+			});
+
+			this.navigate(App.Routes[frame], {
+				trigger: true
+			});
 		},
 		home: function(request, page) {
-			console.log(request, page);
-			this.reset();
-			appView.$('#home').fadeIn(this.fadeInTiming);
+			this.setActiveFrame(0);
 			appView.$('.js-menuLink[href="#home"]').addClass('active');
 		},
 		resume: function() {
-			this.reset();
-			appView.$('#resume').fadeIn(this.fadeInTiming);
+			this.setActiveFrame(1);
 			appView.$('.js-menuLink[href="#resume"]').addClass('active');
 		},
 		show: function() {
-			this.reset();
-			appView.$('#show').fadeIn(this.fadeInTiming);
+			this.setActiveFrame(2);
 			appView.$('.js-menuLink[href="#show"]').addClass('active');
 		},
 		mirazh: function() {
-			this.reset();
-			appView.$('#mirazh').fadeIn(this.fadeInTiming);
+			this.setActiveFrame(3);
 			appView.$('.js-menuLink[href="#mirazh"]').addClass('active');
 		},
 		gallery: function() {
-			this.reset();
-			appView.$('#gallery').fadeIn(this.fadeInTiming);
+			this.setActiveFrame(4);
 			appView.$('.js-menuLink[href="#gallery"]').addClass('active');
 		},
 		news: function() {
-			this.reset();
-			appView.$('#news').fadeIn(this.fadeInTiming);
+			this.setActiveFrame(5);
 			appView.$('.js-menuLink[href="#news"]').addClass('active');
 		},
 		contacts: function() {
-			this.reset();
-			appView.$('#contacts').fadeIn(this.fadeInTiming);
+			this.setActiveFrame(6);
 			appView.$('.js-menuLink[href="#contacts"]').addClass('active');
 		}
 	});
