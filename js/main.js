@@ -113,10 +113,26 @@ $(function() {
 		},
 		nextPage: function() {
 			appView.currentFrame++;
+			// To prevent dbl click
+			this.$el.undelegate('.js-slideArrowRight', 'click');
 			if (appView.currentFrame < appView.framesCount) {
+				// To prevent dbl click
+				setTimeout(function() {
+					appView.$el.delegate('.js-slideArrowRight', 'click', function() {
+						appView.nextPage();
+					});
+				}, 200);
+
 				router.setActiveFrame(appView.currentFrame);
 				appView.$('.js-framesContainer').off('animationEnded');
 			} else {
+				// To prevent dbl click
+				setTimeout(function() {
+					appView.$el.delegate('.js-slideArrowRight', 'click keyup', function() {
+						appView.nextPage();
+					});
+				}, 200);
+
 				appView.$('.js-section:last').after(appView.$('.js-section:first'));
 				appView.$('.js-framesContainer').css({
 					'transition': 'left 0s ease-in-out',
