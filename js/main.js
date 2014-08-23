@@ -75,21 +75,43 @@ $(function() {
 			}
 		},
 		prevPage: function() {
-			this.currentFrame--;
-			if (this.currentFrame >= 0) {
-				router.setActiveFrame(this.currentFrame);
+			appView.currentFrame--;
+			if (appView.currentFrame >= 0) {
+				router.setActiveFrame(appView.currentFrame);
 			} else {
-				this.currentFrame = this.framesCount - 1;
-				router.setActiveFrame(this.currentFrame);
+				appView.$('.js-section:first').before(appView.$('.js-section:last'));
+				appView.$('.js-framesContainer').css({
+					'left': -1 * appView.frameWidth
+				}).animate({
+					'left': 0 * appView.frameWidth
+				}, 500, function() {
+					appView.$('.js-section:last').after(appView.$('.js-section:first'));
+					appView.$('.js-framesContainer').css({
+						'left': -(appView.framesCount - 1) * appView.frameWidth
+					});
+					appView.currentFrame = appView.framesCount - 1;
+					router.setActiveFrame(appView.currentFrame);
+				});
 			}
 		},
 		nextPage: function() {
-			this.currentFrame++;
-			if (this.currentFrame < this.framesCount) {
-				router.setActiveFrame(this.currentFrame);
+			appView.currentFrame++;
+			if (appView.currentFrame < appView.framesCount) {
+				router.setActiveFrame(appView.currentFrame);
 			} else {
-				this.currentFrame = 0;
-				router.setActiveFrame(this.currentFrame);
+				appView.$('.js-section:last').after(appView.$('.js-section:first'));
+				appView.$('.js-framesContainer').css({
+					'left': -(appView.currentFrame - 2) * appView.frameWidth
+}).animate({
+					'left': -(appView.framesCount - 1) * appView.frameWidth
+				}, 500, function() {
+					appView.currentFrame = 0;
+					appView.$('.js-section:first').before(appView.$('.js-section:last'));
+					appView.$('.js-framesContainer').css({
+						'left': appView.currentFrame * appView.frameWidth
+					});
+					router.setActiveFrame(appView.currentFrame);
+				});
 			}
 		}
 	});
@@ -114,9 +136,13 @@ $(function() {
 		activeFrame: 0,
 		setActiveFrame: function(frame) {
 			appView.$('.js-menuLink').removeClass('active');
-			appView.$('.js-framesContainer').css({
+			/*appView.$('.js-framesContainer').css({
 				'left': -frame * appView.frameWidth
-			});
+			});*/
+
+			appView.$('.js-framesContainer').animate({
+				'left': -frame * appView.frameWidth
+			}, 500);
 
 			this.navigate(App.Routes[frame], {
 				trigger: true
