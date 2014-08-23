@@ -14,15 +14,28 @@ $(function() {
 	 *
 	 ******************/
 
-	App.Routes = [
-		'home',
-		'resume',
-		'show',
-		'mirazh',
-		'gallery',
-		'news',
-		'contacts'
-	];
+	App.Routes = [{
+		id: 0,
+		route: 'home'
+	}, {
+		id: 1,
+		route: 'resume'
+	}, {
+		id: 2,
+		route: 'show'
+	}, {
+		id: 3,
+		route: 'mirazh'
+	}, {
+		id: 4,
+		route: 'gallery'
+	}, {
+		id: 5,
+		route: 'news'
+	}, {
+		id: 6,
+		route: 'contacts'
+	}];
 
 	/*****************
 	 *
@@ -58,9 +71,13 @@ $(function() {
 				'width': this.frameWidth,
 				'height': this.frameHeight
 			});
+
+			this.$('.js-framesContainer').on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
+				$(this).trigger('animationEnded');
+			});
 		},
 		setRoute: function(id) {
-			router.navigate(App.Routes[id], {
+			router.navigate(App.Routes[id].route, {
 				trigger: true
 			});
 		},
@@ -98,20 +115,37 @@ $(function() {
 			appView.currentFrame++;
 			if (appView.currentFrame < appView.framesCount) {
 				router.setActiveFrame(appView.currentFrame);
+				appView.$('.js-framesContainer').off('animationEnded');
 			} else {
 				appView.$('.js-section:last').after(appView.$('.js-section:first'));
 				appView.$('.js-framesContainer').css({
+					'transition': 'left 0s ease-in-out',
 					'left': -(appView.currentFrame - 2) * appView.frameWidth
-}).animate({
-					'left': -(appView.framesCount - 1) * appView.frameWidth
-				}, 500, function() {
-					appView.currentFrame = 0;
+				});
+
+				// css transition fix
+				setTimeout(function() {
+					appView.$('.js-framesContainer').css({
+						'transition': 'left .5s ease-in-out',
+						'left': -(appView.framesCount - 1) * appView.frameWidth
+					});
+				}, 0);
+
+				appView.currentFrame = 0;
+				appView.$('.js-framesContainer').on('animationEnded', function() {
 					appView.$('.js-section:first').before(appView.$('.js-section:last'));
 					appView.$('.js-framesContainer').css({
+						'transition': 'left 0s ease-in-out',
 						'left': appView.currentFrame * appView.frameWidth
 					});
-					router.setActiveFrame(appView.currentFrame);
 				});
+
+				router.navigate(App.Routes[0].route, {
+					trigger: false
+				});
+
+				appView.$('.js-menuLink').removeClass('active');
+				appView.$('.js-menuLink[data-id="0"]').addClass('active');
 			}
 		}
 	});
@@ -136,45 +170,64 @@ $(function() {
 		activeFrame: 0,
 		setActiveFrame: function(frame) {
 			appView.$('.js-menuLink').removeClass('active');
-			/*appView.$('.js-framesContainer').css({
-				'left': -frame * appView.frameWidth
-			});*/
+			appView.$('.js-menuLink[data-id="' + frame + '"]').addClass('active');
 
-			appView.$('.js-framesContainer').animate({
+			appView.$('.js-framesContainer').css({
+				'transition': 'left .5s ease-in-out',
 				'left': -frame * appView.frameWidth
-			}, 500);
+			});
 
-			this.navigate(App.Routes[frame], {
+			this.navigate(App.Routes[frame].route, {
 				trigger: true
 			});
+
+			appView.$('.js-framesContainer').off('animationEnded');
 		},
-		home: function(request, page) {
-			this.setActiveFrame(0);
-			appView.$('.js-menuLink[href="#home"]').addClass('active');
+		getRouteId: function(routeName) {
+			var pageId = null;
+			_.find(App.Routes, function(route, i) {
+				if (route.route === routeName) {
+					pageId = i;
+					return route;
+				}
+			});
+
+			return pageId;
+		},
+		home: function() {
+			var id = this.getRouteId('home');
+			this.setActiveFrame(id);
+			appView.currentFrame = id;
 		},
 		resume: function() {
-			this.setActiveFrame(1);
-			appView.$('.js-menuLink[href="#resume"]').addClass('active');
+			var id = this.getRouteId('resume');
+			this.setActiveFrame(id);
+			appView.currentFrame = id;
 		},
 		show: function() {
-			this.setActiveFrame(2);
-			appView.$('.js-menuLink[href="#show"]').addClass('active');
+			var id = this.getRouteId('show');
+			this.setActiveFrame(id);
+			appView.currentFrame = id;
 		},
 		mirazh: function() {
-			this.setActiveFrame(3);
-			appView.$('.js-menuLink[href="#mirazh"]').addClass('active');
+			var id = this.getRouteId('mirazh');
+			this.setActiveFrame(id);
+			appView.currentFrame = id;
 		},
 		gallery: function() {
-			this.setActiveFrame(4);
-			appView.$('.js-menuLink[href="#gallery"]').addClass('active');
+			var id = this.getRouteId('gallery');
+			this.setActiveFrame(id);
+			appView.currentFrame = id;
 		},
 		news: function() {
-			this.setActiveFrame(5);
-			appView.$('.js-menuLink[href="#news"]').addClass('active');
+			var id = this.getRouteId('news');
+			this.setActiveFrame(id);
+			appView.currentFrame = id;
 		},
 		contacts: function() {
-			this.setActiveFrame(6);
-			appView.$('.js-menuLink[href="#contacts"]').addClass('active');
+			var id = this.getRouteId('contacts');
+			this.setActiveFrame(id);
+			appView.currentFrame = id;
 		}
 	});
 
