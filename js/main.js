@@ -93,22 +93,56 @@ $(function() {
 		},
 		prevPage: function() {
 			appView.currentFrame--;
+			// To prevent dbl click
+			this.$el.undelegate('.js-slideArrowLeft', 'click');
 			if (appView.currentFrame >= 0) {
+				// To prevent dbl click
+				setTimeout(function() {
+					appView.$el.delegate('.js-slideArrowLeft', 'click', function() {
+						appView.prevPage();
+					});
+				}, 300);
+
 				router.setActiveFrame(appView.currentFrame);
+				appView.$('.js-framesContainer').off('animationEnded');
 			} else {
+				// To prevent dbl click
+				setTimeout(function() {
+					appView.$el.delegate('.js-slideArrowLeft', 'click keyup', function() {
+						appView.prevPage();
+					});
+				}, 300);
+
 				appView.$('.js-section:first').before(appView.$('.js-section:last'));
 				appView.$('.js-framesContainer').css({
+					'transition': 'left 0s ease-in-out',
 					'left': -1 * appView.frameWidth
-				}).animate({
-					'left': 0 * appView.frameWidth
-				}, 500, function() {
+				});
+
+				// css transition fix
+				setTimeout(function() {
+					appView.$('.js-framesContainer').css({
+						'transition': 'left .5s ease-in-out',
+						'left': 0 * appView.frameWidth
+					});
+				}, 0);
+
+				appView.currentFrame = 0;
+				appView.$('.js-framesContainer').on('animationEnded', function() {
 					appView.$('.js-section:last').after(appView.$('.js-section:first'));
 					appView.$('.js-framesContainer').css({
+						'transition': 'left 0s ease-in-out',
 						'left': -(appView.framesCount - 1) * appView.frameWidth
 					});
 					appView.currentFrame = appView.framesCount - 1;
-					router.setActiveFrame(appView.currentFrame);
 				});
+
+				router.navigate(App.Routes[(appView.framesCount - 1)].route, {
+					trigger: false
+				});
+
+				appView.$('.js-menuLink').removeClass('active');
+				appView.$('.js-menuLink[data-id="' + (appView.framesCount - 1) + '"]').addClass('active');
 			}
 		},
 		nextPage: function() {
@@ -121,7 +155,7 @@ $(function() {
 					appView.$el.delegate('.js-slideArrowRight', 'click', function() {
 						appView.nextPage();
 					});
-				}, 200);
+				}, 300);
 
 				router.setActiveFrame(appView.currentFrame);
 				appView.$('.js-framesContainer').off('animationEnded');
@@ -131,7 +165,7 @@ $(function() {
 					appView.$el.delegate('.js-slideArrowRight', 'click keyup', function() {
 						appView.nextPage();
 					});
-				}, 200);
+				}, 300);
 
 				appView.$('.js-section:last').after(appView.$('.js-section:first'));
 				appView.$('.js-framesContainer').css({
