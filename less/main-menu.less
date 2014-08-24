@@ -11,10 +11,19 @@
 	}
 	&__link {
 		display: inline-block;
-		padding: 10px;
-		transition: color .5s;
+		padding: 15px 30px;
+		text-decoration: none;
+		font-size: 30px;
+		background: rgba(255,255,255,0);
+		transition: background .3s;
+		line-height: 1;
+		white-space: nowrap;
+		.ristretto();
 		&.active {
 			color: orange;
+		}
+		&:hover {
+			background: rgba(255,255,255,.05);
 		}
 	}
 }

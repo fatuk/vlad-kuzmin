@@ -25,7 +25,7 @@ $(function() {
 		route: 'show'
 	}, {
 		id: 3,
-		route: 'mirazh'
+		route: 'school'
 	}, {
 		id: 4,
 		route: 'gallery'
@@ -122,12 +122,12 @@ $(function() {
 				// css transition fix
 				setTimeout(function() {
 					appView.$('.js-framesContainer').css({
-						'transition': 'left .5s ease-in-out',
+						'transition': 'left 1s ease-in-out',
 						'left': 0 * appView.frameWidth
 					});
 				}, 0);
 
-				appView.currentFrame = 0;
+				// appView.currentFrame = 0;
 				appView.$('.js-framesContainer').on('animationEnded', function() {
 					appView.$('.js-section:last').after(appView.$('.js-section:first'));
 					appView.$('.js-framesContainer').css({
@@ -135,6 +135,7 @@ $(function() {
 						'left': -(appView.framesCount - 1) * appView.frameWidth
 					});
 					appView.currentFrame = appView.framesCount - 1;
+					console.log(appView.currentFrame);
 				});
 
 				router.navigate(App.Routes[(appView.framesCount - 1)].route, {
@@ -144,6 +145,7 @@ $(function() {
 				appView.$('.js-menuLink').removeClass('active');
 				appView.$('.js-menuLink[data-id="' + (appView.framesCount - 1) + '"]').addClass('active');
 			}
+
 		},
 		nextPage: function() {
 			appView.currentFrame++;
@@ -176,7 +178,7 @@ $(function() {
 				// css transition fix
 				setTimeout(function() {
 					appView.$('.js-framesContainer').css({
-						'transition': 'left .5s ease-in-out',
+						'transition': 'left 1s ease-in-out',
 						'left': -(appView.framesCount - 1) * appView.frameWidth
 					});
 				}, 0);
@@ -197,6 +199,7 @@ $(function() {
 				appView.$('.js-menuLink').removeClass('active');
 				appView.$('.js-menuLink[data-id="0"]').addClass('active');
 			}
+			console.log(appView.currentFrame);
 		}
 	});
 
@@ -212,7 +215,7 @@ $(function() {
 			'home': 'home',
 			'resume': 'resume',
 			'show': 'show',
-			'mirazh': 'mirazh',
+			'school': 'school',
 			'gallery': 'gallery',
 			'news': 'news',
 			'contacts': 'contacts'
@@ -223,7 +226,7 @@ $(function() {
 			appView.$('.js-menuLink[data-id="' + frame + '"]').addClass('active');
 
 			appView.$('.js-framesContainer').css({
-				'transition': 'left .5s ease-in-out',
+				'transition': 'left 1s ease-in-out',
 				'left': -frame * appView.frameWidth
 			});
 
@@ -259,8 +262,8 @@ $(function() {
 			this.setActiveFrame(id);
 			appView.currentFrame = id;
 		},
-		mirazh: function() {
-			var id = this.getRouteId('mirazh');
+		school: function() {
+			var id = this.getRouteId('school');
 			this.setActiveFrame(id);
 			appView.currentFrame = id;
 		},
