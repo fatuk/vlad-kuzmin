@@ -1,0 +1,55 @@
+.section {
+	float: left;
+	position: relative;
+	&_home {
+		background-size: 100%;
+		.section__overlay {
+			background: rgba(72,47,31,.45);
+		}
+	}
+	&_resume {
+		background: url('../img/03_about.jpg') no-repeat top center;
+		background-size: 100%;
+	}
+	&_show {
+		background: url('../img/04_show.jpg') no-repeat top center;
+		background-size: 100%;
+	}
+	&_school {
+		background: url('../img/07_ds.jpg') no-repeat top center;
+		background-size: 100%;
+	}
+	&_gallery {
+		background: url('../img/08_gallery.jpg') no-repeat top center;
+		background-size: 100%;
+	}
+	&_news {
+		background: url('../img/09_news.jpg') no-repeat top center;
+		background-size: 100%;
+	}
+	&_contacts {
+		background: url('../img/10_contacts.jpg') no-repeat top center;
+		background-size: 100%;
+	}
+	&__img {
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	&__overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+	}
+	.icon-logo {
+		position: relative;
+		z-index: 5;
+		display: block;
+		width: 540px;
+		margin: 0 auto;
+	}
+}

@@ -1,5 +1,15 @@
 .main-menu {
 	width: 100%;
+	position: relative;
+	&:before {
+		content: '';
+		background: url('../img/dashed.svg');
+		position: absolute;
+		width: 100%;
+		height: 1px;
+		bottom: 0;
+		left: 0;
+	}
 	&__list {
 		list-style: none;
 		padding: 0;
@@ -11,19 +21,33 @@
 	}
 	&__link {
 		display: inline-block;
-		padding: 15px 30px;
+		padding: 15px;
 		text-decoration: none;
 		font-size: 30px;
 		background: rgba(255,255,255,0);
-		transition: background .3s;
+		transition: background .3s, border .3s;
 		line-height: 1;
 		white-space: nowrap;
 		.ristretto();
+		border-bottom: solid 1px rgba(255,255,255,0);
+		position: relative;
 		&.active {
-			color: orange;
+			&:before {
+				content: url('../img/active-menu.svg');
+				position: absolute;
+				top: -14px;
+				width: 100%;
+				text-align: center;
+				left: 0;
+				height: 0;
+			}
 		}
 		&:hover {
+			border-bottom: solid 1px rgba(255,255,255,1);
 			background: rgba(255,255,255,.05);
+		}
+		.icon-home {
+			width: 29px;
 		}
 	}
 }
