@@ -26,5 +26,9 @@ module.exports = {
 	mustache: {
 		files: ['templates/**', 'json/*.json'],
 		tasks: ['mustache_render']
+	},
+	svg: {
+		files: ['svg.src/*.svg'],
+		tasks: ['svg']
 	}
 };

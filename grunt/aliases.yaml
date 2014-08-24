@@ -3,6 +3,7 @@ default:
   - 'autoprefixer'
   - 'uglify'
   - 'mustache_render'
+  - 'svg'
   - 'connect'
   - 'watch'
 svg:
