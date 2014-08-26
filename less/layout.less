@@ -18,7 +18,6 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	// transition: left 1s ease-in-out;
 }
 
 .container {
@@ -32,7 +31,21 @@
 		left: 50%;
 		margin-left: -375px;
 		top: 50%;
-		margin-top: -215px;
+		margin-top: -248px;
+	}
+	&_footer {
+		padding: 30px 21px;
+		padding-bottom: 24px;
+		position: relative;
+		&:before {
+			content: '';
+			background: url('../img/dashed.svg');
+			position: absolute;
+			width: 100%;
+			height: 1px;
+			top: 0;
+			left: 0;
+		}
 	}
 }
 

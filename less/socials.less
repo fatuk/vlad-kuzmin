@@ -1,5 +1,6 @@
 .socials {
 	display: inline-block;
+	margin-top: 5px;
 	&__list {
 		list-style: none;
 		padding: 0;
@@ -11,6 +12,26 @@
 	}
 	&__link {
 		display: inline-block;
-		padding: 10px;
+		position: relative;
+		padding: 0 7px;
+		transition: margin .2s;
+		.icon {
+			width: 30px;
+			height: 30px;
+		}
+		&:hover {
+			margin-top: -5px;
+		}
+		&:before {
+			content: '';
+			position: absolute;
+			display: inline-block;
+			width: 30px;
+			height: 30px;
+			padding: 0 7px;
+			top: 0;
+			left: 0;
+			z-index: 5;
+		}
 	}
 }

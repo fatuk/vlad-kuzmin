@@ -4,22 +4,18 @@
 	top: 0;
 	text-align: center;
 	cursor: pointer;
+	transition: opacity .3s;
 	z-index: 10;
 	.icon {
 		width: 65px;
 		height: 100%;
-		transition: opacity .3s;
 	}
 	&:hover {
-		.icon {
-			opacity: .5;
-		}
+		opacity: .5;
 	}
 	&:active {
-		.icon {
-			transition: none;
-			opacity: 1;
-		}
+		transition: none;
+		opacity: 1;
 	}
 	&_left {
 		left: 0;

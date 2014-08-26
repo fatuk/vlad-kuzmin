@@ -58,7 +58,7 @@ $(function() {
 		getFramesInfo: function() {
 			var $window = $(window);
 			this.frameWidth = $window.width() >= 940 ? $window.width() : 940;
-			this.frameHeight = $window.height();
+			this.frameHeight = $window.height() >= 680 ? $window.height() : 680;
 			this.framesCount = this.$('.js-section').length;
 		},
 		initialize: function() {
