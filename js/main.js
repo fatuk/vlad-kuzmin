@@ -84,10 +84,10 @@ $(function() {
 		arrowSlide: function(e) {
 			switch (e.keyCode) {
 				case 37:
-					this.prevPage();
+					this.$('.js-slideArrowLeft').trigger('click');
 					break;
 				case 39:
-					this.nextPage();
+					this.$('.js-slideArrowRight').trigger('click');
 					break;
 			}
 		},
@@ -96,15 +96,14 @@ $(function() {
 			// To prevent dbl click
 			this.$el.undelegate('.js-slideArrowLeft', 'click');
 			if (appView.currentFrame >= 0) {
+				router.setActiveFrame(appView.currentFrame);
+
 				// To prevent dbl click
 				setTimeout(function() {
 					appView.$el.delegate('.js-slideArrowLeft', 'click', function() {
 						appView.prevPage();
 					});
 				}, 300);
-
-				router.setActiveFrame(appView.currentFrame);
-				appView.$('.js-framesContainer').off('animationEnded');
 			} else {
 				// To prevent dbl click
 				setTimeout(function() {
@@ -119,23 +118,15 @@ $(function() {
 					'left': -1 * appView.frameWidth
 				});
 
-				// css transition fix
-				setTimeout(function() {
-					appView.$('.js-framesContainer').css({
-						'transition': 'left 1s ease-in-out',
-						'left': 0 * appView.frameWidth
-					});
-				}, 0);
-
-				// appView.currentFrame = 0;
-				appView.$('.js-framesContainer').on('animationEnded', function() {
+				appView.$('.js-framesContainer').animate({
+					'left': 0 * appView.frameWidth
+				}, 300, function() {
 					appView.$('.js-section:last').after(appView.$('.js-section:first'));
 					appView.$('.js-framesContainer').css({
 						'transition': 'left 0s ease-in-out',
 						'left': -(appView.framesCount - 1) * appView.frameWidth
 					});
 					appView.currentFrame = appView.framesCount - 1;
-					console.log(appView.currentFrame);
 				});
 
 				router.navigate(App.Routes[(appView.framesCount - 1)].route, {
@@ -152,44 +143,33 @@ $(function() {
 			// To prevent dbl click
 			this.$el.undelegate('.js-slideArrowRight', 'click');
 			if (appView.currentFrame < appView.framesCount) {
-				// To prevent dbl click
-				setTimeout(function() {
-					appView.$el.delegate('.js-slideArrowRight', 'click', function() {
-						appView.nextPage();
-					});
-				}, 300);
-
 				router.setActiveFrame(appView.currentFrame);
-				appView.$('.js-framesContainer').off('animationEnded');
-			} else {
-				// To prevent dbl click
+
 				setTimeout(function() {
 					appView.$el.delegate('.js-slideArrowRight', 'click keyup', function() {
 						appView.nextPage();
 					});
 				}, 300);
-
+			} else {
 				appView.$('.js-section:last').after(appView.$('.js-section:first'));
 				appView.$('.js-framesContainer').css({
-					'transition': 'left 0s ease-in-out',
-					'left': -(appView.currentFrame - 2) * appView.frameWidth
+					'left': -(appView.framesCount - 2) * appView.frameWidth
 				});
 
-				// css transition fix
-				setTimeout(function() {
-					appView.$('.js-framesContainer').css({
-						'transition': 'left 1s ease-in-out',
-						'left': -(appView.framesCount - 1) * appView.frameWidth
-					});
-				}, 0);
-
 				appView.currentFrame = 0;
-				appView.$('.js-framesContainer').on('animationEnded', function() {
+				appView.$('.js-framesContainer').animate({
+					'left': -(appView.framesCount - 1) * appView.frameWidth
+				}, 300, function() {
 					appView.$('.js-section:first').before(appView.$('.js-section:last'));
 					appView.$('.js-framesContainer').css({
-						'transition': 'left 0s ease-in-out',
 						'left': appView.currentFrame * appView.frameWidth
 					});
+
+					setTimeout(function() {
+						appView.$el.delegate('.js-slideArrowRight', 'click keyup', function() {
+							appView.nextPage();
+						});
+					}, 300);
 				});
 
 				router.navigate(App.Routes[0].route, {
@@ -199,7 +179,6 @@ $(function() {
 				appView.$('.js-menuLink').removeClass('active');
 				appView.$('.js-menuLink[data-id="0"]').addClass('active');
 			}
-			console.log(appView.currentFrame);
 		}
 	});
 
@@ -225,16 +204,14 @@ $(function() {
 			appView.$('.js-menuLink').removeClass('active');
 			appView.$('.js-menuLink[data-id="' + frame + '"]').addClass('active');
 
-			appView.$('.js-framesContainer').css({
-				'transition': 'left 1s ease-in-out',
+			appView.$('.js-framesContainer').animate({
 				'left': -frame * appView.frameWidth
-			});
+			}, 300, function() {
 
+			});
 			this.navigate(App.Routes[frame].route, {
-				trigger: true
+				trigger: false
 			});
-
-			appView.$('.js-framesContainer').off('animationEnded');
 		},
 		getRouteId: function(routeName) {
 			var pageId = null;
