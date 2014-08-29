@@ -5,7 +5,16 @@
 	text-align: center;
 	cursor: pointer;
 	transition: opacity .3s;
+	user-select: none;
 	z-index: 10;
+	&:before {
+		content: '';
+		width: 105px;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		z-index: 11;
+	}
 	.icon {
 		width: 65px;
 		height: 100%;
@@ -20,9 +29,15 @@
 	&_left {
 		left: 0;
 		padding-left: 50px;
+		&:before {
+			left: 0;
+		}
 	}
 	&_right {
 		right: 0;
 		padding-right: 50px;
+		&:before {
+			right: 0;
+		}
 	}
 }

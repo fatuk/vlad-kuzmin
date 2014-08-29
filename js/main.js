@@ -16,25 +16,32 @@ $(function() {
 
 	App.Routes = [{
 		id: 0,
-		route: 'home'
+		route: 'home',
+		color: 'rgba(72,47,31,.45)'
 	}, {
 		id: 1,
-		route: 'resume'
+		route: 'resume',
+		color: 'rgba(42,7,34,.45)'
 	}, {
 		id: 2,
-		route: 'show'
+		route: 'show',
+		color: 'rgba(72,47,31,.45)'
 	}, {
 		id: 3,
-		route: 'school'
+		route: 'school',
+		color: 'rgba(72,47,31,.45)'
 	}, {
 		id: 4,
-		route: 'gallery'
+		route: 'gallery',
+		color: 'rgba(72,47,31,.45)'
 	}, {
 		id: 5,
-		route: 'news'
+		route: 'news',
+		color: 'rgba(72,47,31,.45)'
 	}, {
 		id: 6,
-		route: 'contacts'
+		route: 'contacts',
+		color: 'rgba(72,47,31,.45)'
 	}];
 
 	/*****************
@@ -49,6 +56,7 @@ $(function() {
 		events: {
 			'click .js-slideArrowLeft': 'prevPage',
 			'click .js-slideArrowRight': 'nextPage',
+			'click .js-showVideoSliderBtn': 'showVideoSlider',
 			'keyup': 'arrowSlide'
 		},
 		frameWidth: 0,
@@ -179,6 +187,74 @@ $(function() {
 				appView.$('.js-menuLink').removeClass('active');
 				appView.$('.js-menuLink[data-id="0"]').addClass('active');
 			}
+		},
+		showVideoSlider: function() {
+			this.$('.js-videoSlider').fadeIn('fast');
+		}
+	});
+
+	// Slider view
+
+	App.Views.Slider = Backbone.View.extend({
+		el: '.js-videoSlider',
+		events: {
+			'click .js-slideLeft': 'prevSlide',
+			'click .js-slideRight': 'nextSlide',
+			'click .js-closeBtn': 'close'
+		},
+		slidesCount: 0,
+		slideWidth: 0,
+		currentSlide: 0,
+		escape: function(e) {
+			if (e.keyCode === 27) {
+				this.close();
+			}
+		},
+		close: function() {
+			this.$el.fadeOut('fast');
+		},
+		initialize: function() {
+			var self = this;
+			this.slidesCount = this.$('.js-sliderItem').length;
+			this.slideWidth = this.$('.js-sliderItem').width();
+			this.$('.js-slideLeft').hide();
+
+			this.$('.js-sliderContainer').css({
+				'width': this.slidesCount * this.slideWidth
+			});
+
+			$('body').on('keyup', function(e) {
+				self.escape(e);
+			});
+		},
+		setActiveSlide: function(slide) {
+			this.$('.js-sliderContainer').animate({
+				'left': -slide * this.slideWidth
+			}, 300);
+		},
+		prevSlide: function(e) {
+			var self = this;
+			this.currentSlide--;
+			if (this.currentSlide > 0) {
+				this.$('.js-slideArrow').show();
+				this.setActiveSlide(this.currentSlide);
+			} else {
+				this.currentSlide = 0;
+				this.setActiveSlide(this.currentSlide);
+				$(e.currentTarget).hide();
+			}
+		},
+		nextSlide: function(e) {
+			var self = this;
+			this.currentSlide++;
+			if (this.currentSlide < this.slidesCount - 1) {
+				this.$('.js-slideArrow').show();
+				this.setActiveSlide(this.currentSlide);
+			} else {
+				this.currentSlide = this.slidesCount - 1;
+				this.setActiveSlide(this.currentSlide);
+				$(e.currentTarget).hide();
+			}
 		}
 	});
 
@@ -209,6 +285,8 @@ $(function() {
 			}, 300, function() {
 
 			});
+
+			this.setOverlayColor(frame);
 			this.navigate(App.Routes[frame].route, {
 				trigger: false
 			});
@@ -224,15 +302,22 @@ $(function() {
 
 			return pageId;
 		},
+		setOverlayColor: function(frame) {
+			appView.$('.js-colorOverlay').css({
+				'background': App.Routes[frame].color
+			});
+		},
 		home: function() {
 			var id = this.getRouteId('home');
 			this.setActiveFrame(id);
 			appView.currentFrame = id;
+			this.setOverlayColor(id);
 		},
 		resume: function() {
 			var id = this.getRouteId('resume');
 			this.setActiveFrame(id);
 			appView.currentFrame = id;
+			this.setOverlayColor(id);
 		},
 		show: function() {
 			var id = this.getRouteId('show');
@@ -268,7 +353,9 @@ $(function() {
 	 *
 	 ******************/
 
-	var appView = new App.Views.App();
+	var appView = new App.Views.App(),
+		videoSliderView = new App.Views.Slider();
+
 	var router = new App.Router.App();
 
 
