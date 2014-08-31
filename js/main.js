@@ -25,23 +25,23 @@ $(function() {
 	}, {
 		id: 2,
 		route: 'show',
-		color: 'rgba(72,47,31,.45)'
+		color: 'rgba(72,47,31,0)'
 	}, {
 		id: 3,
 		route: 'school',
-		color: 'rgba(72,47,31,.45)'
+		color: 'rgba(17,64,94,.8)'
 	}, {
 		id: 4,
 		route: 'gallery',
-		color: 'rgba(72,47,31,.45)'
+		color: 'rgba(0,0,0,.45)'
 	}, {
 		id: 5,
 		route: 'news',
-		color: 'rgba(72,47,31,.45)'
+		color: 'rgba(50,43,21,.45)'
 	}, {
 		id: 6,
 		route: 'contacts',
-		color: 'rgba(72,47,31,.45)'
+		color: 'rgba(54,76,91,.45)'
 	}];
 
 	/*****************
