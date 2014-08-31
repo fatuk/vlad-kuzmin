@@ -26,16 +26,25 @@
 			margin-top: -10px;
 			display: inline-block;
 		}
+		&:hover {
+			.contacts__phone-text {
+				color: @blue;
+			}
+			.icon {
+				fill: @blue;
+			}
+		}
 	}
 	&__phone-text {
 		text-decoration: none;
+		transition: color .3s;
 	}
 	&__aim {
 		float: left;
 		position: relative;
 		display: inline-block;
 		margin-top: -50px;
-		margin-right: 70px;
+		margin-right: 55px;
 		.icon {
 			width: 80px;
 			fill: #D1D1D1;
@@ -60,6 +69,14 @@
 			vertical-align: middle;
 			margin-top: -8px;
 		}
+		&:hover {
+			.contacts__email-text {
+				color: @blue;
+			}
+			.icon {
+				fill: @blue;
+			}
+		}
 	}
 	&__email-text {
 		.ristretto();
@@ -67,6 +84,7 @@
 		color: #fff;
 		text-decoration: none;
 		border-bottom: solid 1px;
+		transition: color .3s;
 	}
 	&__motto {
 
