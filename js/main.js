@@ -179,6 +179,8 @@ $(function() {
                     trigger: false
                 });
 
+                router.setOverlayColor(appView.framesCount - 1);
+
                 appView.$('.js-menuLink').removeClass('active');
                 appView.$('.js-menuLink[data-id="' + (appView.framesCount - 1) + '"]').addClass('active');
             }
@@ -221,6 +223,8 @@ $(function() {
                 router.navigate(App.Routes[0].route, {
                     trigger: false
                 });
+
+                router.setOverlayColor(0);
 
                 appView.$('.js-menuLink').removeClass('active');
                 appView.$('.js-menuLink[data-id="0"]').addClass('active');
