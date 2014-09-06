@@ -312,7 +312,7 @@ $(function() {
 
             $newsFrame.css({
                 'width': this.newsFrameWidth,
-                'height': appView.frameHeight - appView.headerHeight - 140 - appView.footerHeight
+                'height': this.newsFrameHeight
             });
         },
         initialize: function() {
@@ -325,7 +325,7 @@ $(function() {
             this.setSizes();
 
             if (this.newsPagesCount === 1) {
-                this.$('.js-newsArray').css({
+                this.$('.js-newsArrow').css({
                     'visibility': 'hidden'
                 });
             }
@@ -345,13 +345,13 @@ $(function() {
             this.currentNewsPage--;
             if (this.currentNewsPage > 0) {
                 this.setPage(this.currentNewsPage);
-                this.$('.js-newsArray').css({
+                this.$('.js-newsArrow').css({
                     'visibility': 'visible'
                 });
             } else {
                 this.currentNewsPage = 0;
                 this.setPage(this.currentNewsPage);
-                this.$('.js-newsArray').css({
+                this.$('.js-newsArrow').css({
                     'visibility': 'visible'
                 });
                 $(e.currentTarget).css({
@@ -363,13 +363,13 @@ $(function() {
             this.currentNewsPage++;
             if (this.currentNewsPage < this.newsPagesCount - 1) {
                 this.setPage(this.currentNewsPage);
-                this.$('.js-newsArray').css({
+                this.$('.js-newsArrow').css({
                     'visibility': 'visible'
                 });
             } else {
                 this.currentNewsPage = this.newsPagesCount - 1;
                 this.setPage(this.currentNewsPage);
-                this.$('.js-newsArray').css({
+                this.$('.js-newsArrow').css({
                     'visibility': 'visible'
                 });
                 $(e.currentTarget).css({
