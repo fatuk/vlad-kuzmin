@@ -37,14 +37,16 @@
 		position: relative;
 		&.active {
 			&:before {
-				content: url('../img/active-menu.svg');
+				content: '';
+				background: url('../img/active-menu.svg') no-repeat;
 				position: absolute;
 				display: inline-block;
-				top: -14px;
-				width: 26px;
-				height: 23px;
+				top: 5px;
+				width: 10px;
+				height: 6px;
 				text-align: center;
-				left: 0;
+				left: 50%;
+				margin-left: -5px;
 			}
 		}
 		&:hover {
@@ -56,6 +58,7 @@
 		}
 		.icon-home {
 			width: 26px;
+			height: 23px;
 		}
 	}
 }
