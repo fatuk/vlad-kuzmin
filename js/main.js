@@ -10,7 +10,7 @@ $(function() {
 
     /*****************
      *
-     *	Models
+     *  Models
      *
      ******************/
 
@@ -46,7 +46,7 @@ $(function() {
 
     /*****************
      *
-     *	Views
+     *  Views
      *
      ******************/
 
@@ -288,9 +288,87 @@ $(function() {
         }
     });
 
+    App.Views.News = Backbone.View.extend({
+        el: '.js-news',
+        newsPagesCount: 0,
+        newsFrameWidth: 0,
+        newsFrameHeight: 0,
+        currentNewsPage: 0,
+        initialize: function() {
+            var $newsPage = this.$('.js-newsPage'),
+                $newsFrame = this.$('.js-newsFrame');
+            $newsContainer = this.$('.js-newsContainer');
+            this.newsPagesCount = $newsPage.length;
+            this.newsFrameWidth = $newsPage.width();
+            this.newsFrameHeight = $newsPage.height();
+
+            $newsContainer.css({
+                'width': this.newsFrameWidth * this.newsPagesCount
+            });
+
+            $newsFrame.css({
+                'width': this.newsFrameWidth,
+                'height': this.newsFrameHeight
+            });
+
+            if (this.newsPagesCount === 1) {
+                this.$('.js-newsArray').css({
+                    'visibility': 'hidden'
+                });
+            }
+        },
+        events: {
+            'click .js-prevNews': 'prev',
+            'click .js-nextNews': 'next'
+        },
+        setPage: function(id) {
+            var $newsContainer = this.$('.js-newsContainer'),
+                self = this;
+            $newsContainer.animate({
+                'left': -self.newsFrameWidth * id
+            }, 300);
+        },
+        prev: function(e) {
+            this.currentNewsPage--;
+            if (this.currentNewsPage > 0) {
+                this.setPage(this.currentNewsPage);
+                this.$('.js-newsArray').css({
+                    'visibility': 'visible'
+                });
+            } else {
+                this.currentNewsPage = 0;
+                this.setPage(this.currentNewsPage);
+                this.$('.js-newsArray').css({
+                    'visibility': 'visible'
+                });
+                $(e.currentTarget).css({
+                    'visibility': 'hidden'
+                });
+            }
+        },
+        next: function(e) {
+            this.currentNewsPage++;
+            if (this.currentNewsPage < this.newsPagesCount - 1) {
+                this.setPage(this.currentNewsPage);
+                this.$('.js-newsArray').css({
+                    'visibility': 'visible'
+                });
+            } else {
+                this.currentNewsPage = this.newsPagesCount - 1;
+                this.setPage(this.currentNewsPage);
+                this.$('.js-newsArray').css({
+                    'visibility': 'visible'
+                });
+                $(e.currentTarget).css({
+                    'visibility': 'hidden'
+                });
+            }
+        }
+    });
+
     /*****************
      *
-     *	Routes
+     *  Routes
      *
      ******************/
 
@@ -379,12 +457,13 @@ $(function() {
 
     /*****************
      *
-     *	Initialize
+     *  Initialize
      *
      ******************/
 
     var appView = new App.Views.App(),
-        videoSliderView = new App.Views.Slider();
+        videoSliderView = new App.Views.Slider(),
+        newsView = new App.Views.News();
 
     var router = new App.Router.App();
 

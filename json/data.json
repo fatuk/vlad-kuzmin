@@ -1,3 +1,50 @@
 {
-	"name": "Kukka"
+    "news": [{
+        "dayNumber": 1,
+        "month": "Сентября",
+        "text": "Приходите заниматься к нам танцами!",
+        "red": true
+    },
+    {
+        "dayNumber": 5,
+        "month": "Октября",
+        "text": "Мы опубликовали новое рассписание! Обратите внимание, что теперь по пятницам мы начинаем позже!",
+        "red": false
+    },
+    {
+        "dayNumber": 15,
+        "month": "Октября",
+        "text": "Мы опубликовали новое рассписание!",
+        "red": false
+    },
+    {
+        "dayNumber": 3,
+        "month": "Ноября",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam, quia!",
+        "red": false
+    },
+    {
+        "dayNumber": 25,
+        "month": "Августа",
+        "text": "Мы опубликовали новое рассписание! Обратите внимание, что теперь по пятницам мы начинаем позже!",
+        "red": false
+    },
+    {
+        "dayNumber": 31,
+        "month": "Декабря",
+        "text": "Всех с Новым годом!!!",
+        "red": true
+    },
+    {
+        "dayNumber": 11,
+        "month": "Июля",
+        "text": "Открытое занятие в ботаническом саду",
+        "red": false
+    },
+    {
+        "dayNumber": 30,
+        "month": "Июня",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi suscipit delectus tempore cumque eius inventore illum facilis labore sed ad.",
+        "red": false
+    }]
 }

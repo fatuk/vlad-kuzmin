@@ -1,9 +1,9 @@
 .news {
-	position: relative;
-	margin-top: 110px;
 	padding: 0 30px;
-	z-index: 5;
+	padding-top: 20px;
 	&__list {
+		float: left;
+		width: 880px;
 		list-style: none;
 		padding: 0;
 		margin: 0;
@@ -21,6 +21,14 @@
 				display: block;
 			}
 		}
+	}
+	&__frame {
+		overflow: hidden;
+		position: relative;
+	}
+	&__container {
+		position: absolute;
+		left: 0;
 	}
 	&__date {
 		position: relative;
@@ -41,6 +49,8 @@
 		color: #fff;
 		.ristretto();
 		font-size: 48px;
+		.non-select();
+		cursor: default;
 		z-index: 5;
 	}
 	&__month {
@@ -53,6 +63,8 @@
 		left: 0;
 		z-index: 5;
 		.ristretto();
+		.non-select();
+		cursor: default;
 	}
 	&__red-date {
 		display: none;
@@ -72,5 +84,53 @@
 	table {
 		width: 330px;
 		height: 114px;
+	}
+	&__arrow-container {
+		position: absolute;
+		width: 100%;
+		bottom: 40px;
+		text-align: center;
+	}
+	&__arrow {
+		display: inline-block;
+		margin-right: 60px;
+		.clearfix();
+		cursor: pointer;
+		transition: opacity .3s;
+		&:last-child {
+			margin-right: 0;
+		}
+		&:hover {
+			opacity: .8;
+		}
+		&:active {
+			transition: none;
+			opacity: 1;
+		}
+		.icon {
+			width: 15px;
+			height: 28px;
+			float: left;
+		}
+		&_left {
+			visibility: hidden;
+			.icon {
+				margin-right: 15px;
+			}
+		}
+		&_right {
+			.icon {
+				margin-left: 15px;
+			}
+		}
+	}
+	&__arrow-text {
+		float: left;
+		height: 28px;
+		line-height: 28px;
+		color: #fff;
+		.clearsans();
+		font-size: 16px;
+		.non-select();
 	}
 }

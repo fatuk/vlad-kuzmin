@@ -2,6 +2,15 @@
 	box-sizing: border-box;
 }
 
+@selection-color: #73C6EE;
+::selection {
+  background: @selection-color; /* WebKit/Blink Browsers */
+}
+
+::-moz-selection {
+  background: @selection-color; /* Gecko Browsers */
+}
+
 .hide {
 	display: none;
 }
@@ -44,6 +53,7 @@
 	width: 940px;
 	margin: 0 auto;
 	position: relative;
+	z-index: 5;
 	&_logo {
 		width: 750px;
 		height: 430px;
