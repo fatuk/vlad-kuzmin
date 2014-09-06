@@ -5,6 +5,11 @@
 	display: inline-block;
 	cursor: pointer;
 	z-index: 5;
+	&:hover {
+		.btn__text {
+			border-bottom: solid 1px;
+		}
+	}
 	.icon {
 		fill: currentColor;
 		width: 50px;
@@ -20,5 +25,9 @@
 		.ristretto();
 		vertical-align: middle;
 		border-bottom: dashed 1px;
+	}
+	&_bottom {
+		position: absolute;
+		bottom: 20px;
 	}
 }
