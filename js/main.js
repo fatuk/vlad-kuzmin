@@ -81,6 +81,7 @@ $(function() {
 
             setTimeout(function() {
                 self.setSizes();
+                newsView.setSizes();
                 router.setActiveFrame(self.currentFrame);
                 $(window).on('resize', function(e) {
                     self.resize(e);
@@ -294,13 +295,9 @@ $(function() {
         newsFrameWidth: 0,
         newsFrameHeight: 0,
         currentNewsPage: 0,
-        initialize: function() {
-            var $newsPage = this.$('.js-newsPage'),
-                $newsFrame = this.$('.js-newsFrame');
+        setSizes: function() {
+            var $newsFrame = this.$('.js-newsFrame'),
             $newsContainer = this.$('.js-newsContainer');
-            this.newsPagesCount = $newsPage.length;
-            this.newsFrameWidth = $newsPage.width();
-            this.newsFrameHeight = $newsPage.height();
 
             $newsContainer.css({
                 'width': this.newsFrameWidth * this.newsPagesCount
@@ -308,8 +305,17 @@ $(function() {
 
             $newsFrame.css({
                 'width': this.newsFrameWidth,
-                'height': this.newsFrameHeight
+                'height': appView.frameHeight - appView.headerHeight - 140 - appView.footerHeight
             });
+        },
+        initialize: function() {
+            var $newsPage = this.$('.js-newsPage');
+
+            this.newsPagesCount = $newsPage.length;
+            this.newsFrameWidth = $newsPage.width();
+            this.newsFrameHeight = $newsPage.height();
+
+            this.setSizes();
 
             if (this.newsPagesCount === 1) {
                 this.$('.js-newsArray').css({
