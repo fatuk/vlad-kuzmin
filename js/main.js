@@ -114,6 +114,13 @@ $(function() {
             });
 
             this.setSizes();
+
+            // Colimnizer
+            this.$('.js-article').columnize({
+                columns: 3,
+                lastNeverTallest: true,
+                buildOnce: true
+            });
         },
         setRoute: function(id) {
             router.navigate(App.Routes[id].route, {

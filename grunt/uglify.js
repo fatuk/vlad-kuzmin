@@ -6,6 +6,7 @@ module.exports = {
 		files: {
 			'vendors/plugins.min.js': [
 				'bower_components/jquery/dist/jquery.js',
+				'bower_components/jquery.columnizer/src/jquery.columnizer.js',
 				'bower_components/WOW/dist/wow.js',
 				'bower_components/mustache/mustache.js',
 				'bower_components/underscore/underscore.js',

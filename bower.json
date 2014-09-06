@@ -21,6 +21,7 @@
     "backbone": "~1.1.2",
     "mustache": "~0.8.2",
     "3l": "~1.4.4",
-    "pace": "~0.5.6"
+    "pace": "~0.5.6",
+    "jquery.columnizer": "~1.6.1"
   }
 }
