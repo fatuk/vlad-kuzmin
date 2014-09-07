@@ -106,6 +106,9 @@ $(function() {
             this.$('.js-article').css({
                 'max-height': this.frameHeight - this.headerHeight - 30 - this.footerHeight - 100
             });
+            this.$('.js-tabsContent').css({
+                'max-height': this.frameHeight - this.headerHeight - 30 - this.footerHeight - 30
+            });
         },
         initialize: function() {
             var self = this;
@@ -415,6 +418,48 @@ $(function() {
         }
     });
 
+    // Accordion
+
+    App.Views.Accordion = Backbone.View.extend({
+        el: '.js-accordion',
+        events: {
+            'click .js-accordionBtn': 'click'
+        },
+        click: function(e) {
+            e.preventDefault();
+
+            if ($(e.currentTarget).hasClass('expanded')) {
+                this.close(e);
+            } else {
+                this.open(e);
+            }
+        },
+        open: function(e) {
+            var $currentBtn = $(e.currentTarget),
+                $accordion = $(e.currentTarget).closest('.js-accordion'),
+                $content = $accordion.find('.js-accordionContent'),
+                $plus = $accordion.find('.js-accordionPlus'),
+                $minus = $accordion.find('.js-accordionMinus');
+
+            $currentBtn.addClass('expanded');
+            $content.slideDown('fast');
+            $plus.hide();
+            $minus.show();
+        },
+        close: function(e) {
+            var $currentBtn = $(e.currentTarget),
+                $accordion = $(e.currentTarget).closest('.js-accordion'),
+                $content = $accordion.find('.js-accordionContent'),
+                $plus = $accordion.find('.js-accordionPlus'),
+                $minus = $accordion.find('.js-accordionMinus');
+
+            $currentBtn.removeClass('expanded');
+            $content.slideUp('fast');
+            $plus.show();
+            $minus.hide();
+        }
+    });
+
     /*****************
      *
      *  Routes
@@ -514,7 +559,8 @@ $(function() {
     var appView = new App.Views.App(),
         videoSliderView = new App.Views.Slider(),
         newsView = new App.Views.News(),
-        tabsView = new App.Views.Tabs();
+        tabsView = new App.Views.Tabs(),
+        accordionView = new App.Views.Accordion();
 
     var router = new App.Router.App();
 
