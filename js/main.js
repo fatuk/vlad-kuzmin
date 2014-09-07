@@ -300,6 +300,8 @@ $(function() {
         }
     });
 
+    // News view
+
     App.Views.News = Backbone.View.extend({
         el: '.js-news',
         newsPagesCount: 0,
@@ -308,7 +310,7 @@ $(function() {
         currentNewsPage: 0,
         setSizes: function() {
             var $newsFrame = this.$('.js-newsFrame'),
-            $newsContainer = this.$('.js-newsContainer');
+                $newsContainer = this.$('.js-newsContainer');
 
             $newsContainer.css({
                 'width': this.newsFrameWidth * this.newsPagesCount
@@ -383,6 +385,36 @@ $(function() {
         }
     });
 
+    // Tabs view
+
+    App.Views.Tabs = Backbone.View.extend({
+        el: '.js-tabs',
+        events: {
+            'click .js-tabBtn': 'setTab'
+        },
+        initialize: function() {
+            setTimeout(function() {
+                $('.js-tabBtn.active').trigger('click');
+            }, 0);
+        },
+        setTab: function(e) {
+            e.preventDefault();
+
+            var $currentTab = $(e.currentTarget),
+                currentTabId = $currentTab.attr('href');
+
+            if (!$currentTab.hasClass('active') || !this.$('.js-tabsContent').is(':visible')) {
+                this.resetTabsContent();
+                $(currentTabId).fadeIn('slow');
+                $currentTab.addClass('active');
+            }
+        },
+        resetTabsContent: function() {
+            this.$('.js-tabsContent').hide();
+            this.$('.js-tabBtn').removeClass('active');
+        }
+    });
+
     /*****************
      *
      *  Routes
@@ -398,7 +430,8 @@ $(function() {
             'school': 'school',
             'gallery': 'gallery',
             'news': 'news',
-            'contacts': 'contacts'
+            'contacts': 'contacts',
+            '*path': 'home'
         },
         activeFrame: 0,
         setActiveFrame: function(frame) {
@@ -480,7 +513,8 @@ $(function() {
 
     var appView = new App.Views.App(),
         videoSliderView = new App.Views.Slider(),
-        newsView = new App.Views.News();
+        newsView = new App.Views.News(),
+        tabsView = new App.Views.Tabs();
 
     var router = new App.Router.App();
 
