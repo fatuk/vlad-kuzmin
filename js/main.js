@@ -111,6 +111,9 @@ $(function() {
             this.$('.js-tabsContent').css({
                 'max-height': this.frameHeight - this.headerHeight - 30 - this.footerHeight - 30
             });
+            this.$('.js-newsContainer').css({
+                'max-height': this.frameHeight - this.headerHeight - 30 - this.footerHeight - 50
+            });
             this.$('.js-galleryContainer').css({
                 'height': this.frameHeight - this.headerHeight - 30 - this.footerHeight - 30
             });
@@ -123,16 +126,15 @@ $(function() {
 
             this.setSizes();
 
-            // Colimnizer
+            // Columnizer
             this.$('.js-article').columnize({
                 columns: 3,
                 lastNeverTallest: true,
                 buildOnce: true
             });
 
-            /*galleryView.on('gallery.ready', function() {
-                this.$('.js-scroll').mCustomScrollbar();
-            }, this);*/
+            this.$('.js-scroll').perfectScrollbar();
+
         },
         setRoute: function(id) {
             router.navigate(App.Routes[id].route, {
