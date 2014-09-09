@@ -47,15 +47,18 @@
 			.gallery__icon {
 				opacity: 1;
 			}
+			.icon-zoom-in {
+				animation-play-state: running;
+			}
 		}
 		.icon-zoom-in {
-			width: 48px;
-			height: 38px;
 			position: absolute;
 			top: 50%;
 			left: 50%;
 			margin-left: -24px;
 			margin-top: -19px;
+			animation: zoom-in 1s steps(15) infinite;
+			animation-play-state: paused;
 		}
 	}
 	&__icon {

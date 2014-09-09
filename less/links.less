@@ -38,6 +38,8 @@
 			position: relative;
 			top: 50%;
 			margin-top: -16px;
+			animation: photo .8s steps(20) infinite;
+			animation-play-state: paused;
 		}
 		.icon-video {
 			width: 51px;
@@ -45,6 +47,8 @@
 			position: relative;
 			top: 50%;
 			margin-top: -16px;
+			animation: video .6s steps(6) infinite;
+			animation-play-state: paused;
 		}
 	}
 	&__list {
@@ -59,7 +63,7 @@
 			position: relative;
 			top: 50%;
 			margin-top: -21px;
-			animation: showreal .5s steps(18) infinite;
+			animation: showreal .8s steps(18) infinite;
 			animation-play-state: paused;
 		}
 		.icon-bomb {
@@ -93,6 +97,12 @@
 				animation-play-state: running;
 			}
 			.icon-boot {
+				animation-play-state: running;
+			}
+			.icon-photo {
+				animation-play-state: running;
+			}
+			.icon-video {
 				animation-play-state: running;
 			}
 		}
