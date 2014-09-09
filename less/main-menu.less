@@ -20,7 +20,7 @@
 		float: left;
 	}
 	&__cell {
-		// height: 61px;
+
 	}
 	&__link {
 		display: inline-block;
@@ -53,6 +53,9 @@
 		&:hover {
 			border-bottom: solid 1px rgba(255,255,255,1);
 			background: rgba(255,255,255,.05);
+			.icon-home {
+				animation-play-state: running;
+			}
 		}
 		&_home {
 			padding: 15px;
@@ -60,6 +63,8 @@
 		.icon-home {
 			width: 26px;
 			height: 23px;
+			animation: home .5s steps(29) infinite;
+			animation-play-state: paused;
 		}
 	}
 }
