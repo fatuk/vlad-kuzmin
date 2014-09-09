@@ -300,6 +300,17 @@
 			</div>
 		</div>
 	</div>
+
+	<script type="text/mustache" id="galleryItemTemplate">
+		<a href="{{{img}}}" class="gallery__link">
+			<span class="gallery__icon">
+				<svg viewBox="0 0 48.602 38.006" class="icon icon-zoom-in">
+					<use xlink:href="#zoom-in"></use>
+				</svg>
+			</span>
+			<div class="gallery__img" style="background: url({{thumb}}) 50% center no-repeat; background-size: cover;"></div>
+		</a>
+	</script>
 </section><section class="section section_news js-section" data-frame="news">
 	<div class="container js-container">
 		<div class="news js-news">

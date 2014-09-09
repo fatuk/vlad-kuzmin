@@ -484,6 +484,7 @@ $(function() {
                 this.$('.js-galleryContainer').find('ul').append(galleryItemView.el);
             }, this);
 
+            // Gallery scroll init
             this.$('.js-scroll').perfectScrollbar({
                 wheelSpeed: 40
             });
@@ -496,7 +497,7 @@ $(function() {
         },
         tagName: 'li',
         className: 'gallery__item',
-        template: '<a href="{{{img}}}" class="gallery__link"><div class="gallery__img" style="background: url({{thumb}}) 50% center no-repeat; background-size: cover;"></div></a>',
+        template: $('#galleryItemTemplate').html(),
         render: function() {
             var rendered = Mustache.render(this.template, this.model.toJSON());
             this.$el.html(rendered);
