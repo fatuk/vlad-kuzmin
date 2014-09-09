@@ -750,11 +750,11 @@ $(function() {
     var router = new App.Router.App();
 
     // Sprite player initializing
-    $('.js-sprite').each(function(index, el) {
+    /*$('.js-sprite').each(function(index, el) {
         spritePlayerView = new App.Views.SpritePlayer({
             el: $(el)
         });
-    });
+    });*/
 
 
     Backbone.history.start();

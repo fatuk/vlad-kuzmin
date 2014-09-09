@@ -56,22 +56,18 @@
 		float: left;
 		text-align: center;
 		.icon-showreal {
-			width: 39px;
-			height: 39px;
 			position: relative;
 			top: 50%;
 			margin-top: -21px;
+			animation-play-state: paused;
+			animation-delay: 5s;
 		}
 		.icon-bomb {
-			width: 56px;
-			height: 56px;
 			position: relative;
 			top: 50%;
 			margin-top: -28px;
 		}
 		.icon-shoe {
-			width: 60px;
-			height: 60px;
 			position: relative;
 			top: 50%;
 			margin-top: -30px;
@@ -85,6 +81,11 @@
 				&:before {
 					opacity: 1;
 				}
+			}
+			.icon-showreal {
+				animation: showreal .2s steps(18) infinite;
+				animation-play-state: running;
+				animation-delay: .1s;
 			}
 		}
 	}
