@@ -66,11 +66,15 @@
 			position: relative;
 			top: 50%;
 			margin-top: -28px;
+			animation: bomb .4s steps(4) infinite;
+			animation-play-state: paused;
 		}
-		.icon-shoe {
+		.icon-boot {
 			position: relative;
 			top: 50%;
 			margin-top: -30px;
+			animation: boot .8s steps(36) infinite;
+			animation-play-state: paused;
 		}
 	}
 	&__item-inner {
@@ -83,6 +87,12 @@
 				}
 			}
 			.icon-showreal {
+				animation-play-state: running;
+			}
+			.icon-bomb {
+				animation-play-state: running;
+			}
+			.icon-boot {
 				animation-play-state: running;
 			}
 		}
