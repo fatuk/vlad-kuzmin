@@ -83,6 +83,8 @@ $(function() {
                 self.setSizes();
                 newsView.setSizes();
                 router.setActiveFrame(self.currentFrame);
+                // Uodate custom scroll
+                appView.$('.js-scroll').perfectScrollbar('update');
                 $(window).on('resize', function(e) {
                     self.resize(e);
                 });
@@ -109,6 +111,9 @@ $(function() {
             this.$('.js-tabsContent').css({
                 'max-height': this.frameHeight - this.headerHeight - 30 - this.footerHeight - 30
             });
+            this.$('.js-galleryContainer').css({
+                'height': this.frameHeight - this.headerHeight - 30 - this.footerHeight - 30
+            });
         },
         initialize: function() {
             var self = this;
@@ -124,6 +129,10 @@ $(function() {
                 lastNeverTallest: true,
                 buildOnce: true
             });
+
+            /*galleryView.on('gallery.ready', function() {
+                this.$('.js-scroll').mCustomScrollbar();
+            }, this);*/
         },
         setRoute: function(id) {
             router.navigate(App.Routes[id].route, {
@@ -460,6 +469,41 @@ $(function() {
         }
     });
 
+    // Gallery
+
+    App.Views.Gallery = Backbone.View.extend({
+        el: '.js-gallery',
+        initialize: function() {
+            this.render();
+        },
+        render: function() {
+            this.collection.each(function(galleryItem) {
+                var galleryItemView = new App.Views.GalleryItem({
+                    model: galleryItem
+                });
+                this.$('.js-galleryContainer').find('ul').append(galleryItemView.el);
+            }, this);
+
+            this.$('.js-scroll').perfectScrollbar({
+                wheelSpeed: 40
+            });
+        }
+    });
+
+    App.Views.GalleryItem = Backbone.View.extend({
+        initialize: function() {
+            this.render();
+        },
+        tagName: 'li',
+        className: 'gallery__item',
+        template: '<a href="{{{img}}}" class="gallery__link"><div class="gallery__img" style="background: url({{thumb}}) 50% center no-repeat; background-size: cover;"></div></a>',
+        render: function() {
+            var rendered = Mustache.render(this.template, this.model.toJSON());
+            this.$el.html(rendered);
+            return this;
+        }
+    });
+
     /*****************
      *
      *  Routes
@@ -552,15 +596,97 @@ $(function() {
 
     /*****************
      *
+     *  Collections
+     *
+     ******************/
+
+    var galleryData = [{
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }, {
+        "thumb": "img/photo-1.jpg",
+        "img": "img/photo-1.jpg"
+    }];
+
+    App.Collections.Gallery = Backbone.Collection.extend({});
+
+
+    /*****************
+     *
      *  Initialize
      *
      ******************/
+
+    var galleryCollection = new App.Collections.Gallery(galleryData);
 
     var appView = new App.Views.App(),
         videoSliderView = new App.Views.Slider(),
         newsView = new App.Views.News(),
         tabsView = new App.Views.Tabs(),
-        accordionView = new App.Views.Accordion();
+        accordionView = new App.Views.Accordion(),
+        galleryView = new App.Views.Gallery({
+            collection: galleryCollection
+        });
 
     var router = new App.Router.App();
 

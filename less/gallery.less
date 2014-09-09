@@ -1,0 +1,43 @@
+@galleryItemSize: 235px;
+
+.gallery {
+	&__inner {
+		position: relative;
+	    height: 100%; // Or whatever you want (eg. 400px)
+	    overflow: hidden;
+	}
+	&__list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		.clearfix();
+	}
+	&__item {
+		float: left;
+		// margin-right: 20px;
+		// width: (@galleryItemSize - 20px + (20px / 4));
+		// height: (@galleryItemSize - 20px + (20px / 4));
+		width: (@galleryItemSize);
+		height: (@galleryItemSize);
+		// &:nth-child(4n) {
+		// 	margin-right: 0;
+		// }
+		&:nth-child(9n+1) {
+			width: (@galleryItemSize * 2);
+			height: (@galleryItemSize * 2);
+			margin-right: 0;
+			float: right;
+			.gallery__img {
+				width: (@galleryItemSize * 2);
+				height: (@galleryItemSize * 2);
+			}
+		}
+	}
+	&__link {
+		display: inline-block;
+	}
+	&__img {
+		width: (@galleryItemSize);
+		height: (@galleryItemSize);
+	}
+}
