@@ -596,6 +596,62 @@ $(function() {
         }
     });
 
+    // Sprite player view
+
+    App.Views.SpritePlayer = Backbone.View.extend({
+        el: '.js-sprite',
+        events: {
+            'mouseover': 'play',
+            'mouseout': 'stop',
+            'asd': 'show'
+        },
+        framesCount: 0,
+        frameWidth: 0,
+        frameHeight: 0,
+        speed: 0,
+        spriteUrl: null,
+        timer: null,
+        counter: 0,
+        show: function(e) {
+            console.log(e);
+        },
+        initialize: function() {
+            this.speed = this.$el.data('speed');
+            this.framesCount = this.$el.data('framesCount');
+            this.frameWidth = this.$el.data('frameWidth');
+            this.frameHeight = this.$el.data('frameHeight');
+            this.spriteUrl = this.$el.data('spriteUrl');
+
+            this.$el.css({
+                'width': this.frameWidth,
+                'height': this.frameHeight,
+                'background': 'url(' + this.spriteUrl + ')'
+            });
+        },
+        play: function(e) {
+            var self = this;
+
+            this.timer = setInterval(function() {
+                var $currentSprite = $(e.currentTarget);
+                self.counter++;
+                if (self.counter < self.framesCount) {
+                    $currentSprite.css({
+                        'background-position-x': -self.counter * self.frameWidth
+                    });
+                } else {
+                    self.counter = 0;
+                    $currentSprite.css({
+                        'background-position-x': -self.counter * self.frameWidth
+                    });
+                }
+
+            }, (1 / this.speed) * 10);
+        },
+        stop: function() {
+            clearInterval(this.timer);
+        }
+    });
+
 
     /*****************
      *
@@ -692,6 +748,13 @@ $(function() {
         });
 
     var router = new App.Router.App();
+
+    // Sprite player initializing
+    $('.js-sprite').each(function(index, el) {
+        spritePlayerView = new App.Views.SpritePlayer({
+            el: $(el)
+        });
+    });
 
 
     Backbone.history.start();
