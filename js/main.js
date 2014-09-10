@@ -208,6 +208,8 @@ $(function() {
 
                 appView.$('.js-menuLink').removeClass('active');
                 appView.$('.js-menuLink[data-id="' + (appView.framesCount - 1) + '"]').addClass('active');
+
+                appView.$('[href="#contacts"]').trigger('click');
             }
 
         },
@@ -250,6 +252,7 @@ $(function() {
                 });
 
                 router.setOverlayColor(0);
+                appView.$('[href="#home"]').trigger('click');
 
                 appView.$('.js-menuLink').removeClass('active');
                 appView.$('.js-menuLink[data-id="0"]').addClass('active');
