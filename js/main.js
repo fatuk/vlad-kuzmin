@@ -57,7 +57,8 @@ $(function() {
             'click .js-slideArrowLeft': 'prevPage',
             'click .js-slideArrowRight': 'nextPage',
             'click .js-showVideoSliderBtn': 'showVideoSlider',
-            'keyup': 'arrowSlide'
+            'keyup': 'arrowSlide',
+            'click .js-menuLink': 'setPointer'
         },
         frameWidth: 0,
         frameHeight: 0,
@@ -65,6 +66,16 @@ $(function() {
         currentFrame: 0,
         headerHeight: 0,
         footerHeight: 0,
+        setPointer: function(e) {
+            var $currentTarget = $(e.currentTarget),
+                $pointer = this.$('.js-menuPointer'),
+                menuItemWidth = $currentTarget.outerWidth(),
+                menuItemPosition = $currentTarget.position().left;
+
+            $pointer.css({
+                'left': menuItemPosition + (menuItemWidth / 2) - 5
+            });
+        },
         getFramesInfo: function() {
             var $window = $(window);
             this.frameWidth = $window.width() >= 940 ? $window.width() : 940;
@@ -528,13 +539,17 @@ $(function() {
         activeFrame: 0,
         setActiveFrame: function(frame) {
             appView.$('.js-menuLink').removeClass('active');
-            appView.$('.js-menuLink[data-id="' + frame + '"]').addClass('active');
+            var $activeMenuLink = appView.$('.js-menuLink[data-id="' + frame + '"]');
+            $activeMenuLink.addClass('active');
+
+
+            setTimeout(function() {
+                $activeMenuLink.trigger('click');
+            }, 300);
 
             appView.$('.js-framesContainer').animate({
                 'left': -frame * appView.frameWidth
-            }, 300, function() {
-
-            });
+            }, 300);
 
             this.setOverlayColor(frame);
             this.navigate(App.Routes[frame].route, {
@@ -561,13 +576,11 @@ $(function() {
             var id = this.getRouteId('home');
             this.setActiveFrame(id);
             appView.currentFrame = id;
-            this.setOverlayColor(id);
         },
         resume: function() {
             var id = this.getRouteId('resume');
             this.setActiveFrame(id);
             appView.currentFrame = id;
-            this.setOverlayColor(id);
         },
         show: function() {
             var id = this.getRouteId('show');
