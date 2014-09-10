@@ -66,6 +66,7 @@ $(function() {
         currentFrame: 0,
         headerHeight: 0,
         footerHeight: 0,
+        animationSpeed: 500,
         setPointer: function(e) {
             var $currentTarget = $(e.currentTarget),
                 $pointer = this.$('.js-menuPointer'),
@@ -191,7 +192,7 @@ $(function() {
 
                 appView.$('.js-framesContainer').animate({
                     'left': 0 * appView.frameWidth
-                }, 300, function() {
+                }, appView.animationSpeed, function() {
                     appView.$('.js-section:last').after(appView.$('.js-section:first'));
                     appView.$('.js-framesContainer').css({
                         'transition': 'left 0s ease-in-out',
@@ -234,7 +235,7 @@ $(function() {
                 appView.currentFrame = 0;
                 appView.$('.js-framesContainer').animate({
                     'left': -(appView.framesCount - 1) * appView.frameWidth
-                }, 300, function() {
+                }, appView.animationSpeed, function() {
                     appView.$('.js-section:first').before(appView.$('.js-section:last'));
                     appView.$('.js-framesContainer').css({
                         'left': appView.currentFrame * appView.frameWidth
@@ -300,7 +301,7 @@ $(function() {
         setActiveSlide: function(slide) {
             this.$('.js-sliderContainer').animate({
                 'left': -slide * this.slideWidth
-            }, 300);
+            }, appView.animationSpeed);
         },
         prevSlide: function(e) {
             var self = this;
@@ -373,7 +374,7 @@ $(function() {
                 self = this;
             $newsContainer.animate({
                 'left': -self.newsFrameWidth * id
-            }, 300);
+            }, appView.animationSpeed);
         },
         prev: function(e) {
             this.currentNewsPage--;
@@ -552,7 +553,7 @@ $(function() {
 
             appView.$('.js-framesContainer').animate({
                 'left': -frame * appView.frameWidth
-            }, 300);
+            }, appView.animationSpeed);
 
             this.setOverlayColor(frame);
             this.navigate(App.Routes[frame].route, {
