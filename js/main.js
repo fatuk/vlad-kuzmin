@@ -628,9 +628,6 @@ $(function() {
         spriteUrl: null,
         timer: null,
         counter: 0,
-        show: function(e) {
-            console.log(e);
-        },
         initialize: function() {
             this.speed = this.$el.data('speed');
             this.framesCount = this.$el.data('framesCount');
