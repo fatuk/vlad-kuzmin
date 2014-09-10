@@ -547,18 +547,18 @@ $(function() {
             $activeMenuLink.addClass('active');
 
 
-            setTimeout(function() {
+            /*setTimeout(function() {
                 $activeMenuLink.trigger('click');
-            }, 300);
+            }, 300);*/
 
             appView.$('.js-framesContainer').animate({
                 'left': -frame * appView.frameWidth
             }, appView.animationSpeed);
 
             this.setOverlayColor(frame);
-            this.navigate(App.Routes[frame].route, {
+            /*this.navigate(App.Routes[frame].route, {
                 trigger: false
-            });
+            });*/
         },
         getRouteId: function(routeName) {
             var pageId = null;
@@ -740,6 +740,8 @@ $(function() {
         "thumb": "img/photo-1.jpg",
         "img": "img/photo-1.jpg"
     }];
+
+    galleryData=[];
 
     App.Collections.Gallery = Backbone.Collection.extend({});
 
