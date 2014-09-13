@@ -229,34 +229,42 @@ $(function() {
             } else {
                 appView.$('.js-section:last').after(appView.$('.js-section:first'));
                 appView.$('.js-framesContainer').css({
-                    'left': -(appView.framesCount - 2) * appView.frameWidth
+                    'transition': 'none',
+                    'transform': 'translate3d(' + -(appView.framesCount - 2) * appView.frameWidth + 'px, 0, 0)'
                 });
 
-                appView.currentFrame = 0;
-                appView.$('.js-framesContainer').animate({
-                    'left': -(appView.framesCount - 1) * appView.frameWidth
-                }, appView.animationSpeed, function() {
-                    appView.$('.js-section:first').before(appView.$('.js-section:last'));
+                setTimeout(function() {
+                    appView.currentFrame = 0;
+
                     appView.$('.js-framesContainer').css({
-                        'left': appView.currentFrame * appView.frameWidth
+                        'transition': 'transform ' + appView.animationSpeed / 1000 + 's',
+                        'transform': 'translate3d(' + -(appView.framesCount - 1) * appView.frameWidth + 'px, 0, 0)'
                     });
 
                     setTimeout(function() {
-                        appView.$el.delegate('.js-slideArrowRight', 'click keyup', function() {
-                            appView.nextPage();
+                        appView.$('.js-section:first').before(appView.$('.js-section:last'));
+                        appView.$('.js-framesContainer').css({
+                            'transition': 'none',
+                            'transform': 'translate3d(' + appView.currentFrame * appView.frameWidth + 'px, 0, 0)'
                         });
-                    }, 300);
-                });
 
-                router.navigate(App.Routes[0].route, {
-                    trigger: false
-                });
+                        setTimeout(function() {
+                            appView.$el.delegate('.js-slideArrowRight', 'click keyup', function() {
+                                appView.nextPage();
+                            });
+                        }, 300);
+                    }, appView.animationSpeed);
 
-                router.setOverlayColor(0);
-                appView.$('[href="#home"]').trigger('click');
+                    router.navigate(App.Routes[0].route, {
+                        trigger: false
+                    });
 
-                appView.$('.js-menuLink').removeClass('active');
-                appView.$('.js-menuLink[data-id="0"]').addClass('active');
+                    router.setOverlayColor(0);
+                    appView.$('[href="#home"]').trigger('click');
+
+                    appView.$('.js-menuLink').removeClass('active');
+                    appView.$('.js-menuLink[data-id="0"]').addClass('active');
+                }, 200);
             }
         },
         showVideoSlider: function() {
@@ -551,9 +559,14 @@ $(function() {
                 $activeMenuLink.trigger('click');
             }, 300);
 
-            appView.$('.js-framesContainer').animate({
+            /*appView.$('.js-framesContainer').animate({
                 'left': -frame * appView.frameWidth
-            }, appView.animationSpeed);
+            }, appView.animationSpeed);*/
+
+            appView.$('.js-framesContainer').css({
+                'transform': 'translate3d(' + -frame * appView.frameWidth + 'px, 0, 0)',
+                'transition': 'transform ' + appView.animationSpeed / 1000 + 's'
+            });
 
             this.setOverlayColor(frame);
             this.navigate(App.Routes[frame].route, {
