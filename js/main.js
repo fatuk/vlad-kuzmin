@@ -186,31 +186,36 @@ $(function() {
 
                 appView.$('.js-section:first').before(appView.$('.js-section:last'));
                 appView.$('.js-framesContainer').css({
-                    'transition': 'left 0s ease-in-out',
-                    'left': -1 * appView.frameWidth
+                    'transition': 'none',
+                    'transform': 'translate3d(' + -1 * appView.frameWidth + 'px, 0, 0)'
                 });
 
-                appView.$('.js-framesContainer').animate({
-                    'left': 0 * appView.frameWidth
-                }, appView.animationSpeed, function() {
-                    appView.$('.js-section:last').after(appView.$('.js-section:first'));
+                setTimeout(function() {
                     appView.$('.js-framesContainer').css({
-                        'transition': 'left 0s ease-in-out',
-                        'left': -(appView.framesCount - 1) * appView.frameWidth
+                        'transition': 'transform ' + appView.animationSpeed / 1000 + 's',
+                        'transform': 'translate3d(' + 0 + 'px, 0, 0)'
                     });
-                    appView.currentFrame = appView.framesCount - 1;
-                });
 
-                router.navigate(App.Routes[(appView.framesCount - 1)].route, {
-                    trigger: false
-                });
+                    setTimeout(function() {
+                        appView.$('.js-section:last').after(appView.$('.js-section:first'));
+                        appView.$('.js-framesContainer').css({
+                            'transition': 'none',
+                            'transform': 'translate3d(' + -(appView.framesCount - 1) * appView.frameWidth + 'px, 0, 0)'
+                        });
+                        appView.currentFrame = appView.framesCount - 1;
+                    }, appView.animationSpeed);
 
-                router.setOverlayColor(appView.framesCount - 1);
+                    router.navigate(App.Routes[(appView.framesCount - 1)].route, {
+                        trigger: false
+                    });
 
-                appView.$('.js-menuLink').removeClass('active');
-                appView.$('.js-menuLink[data-id="' + (appView.framesCount - 1) + '"]').addClass('active');
+                    router.setOverlayColor(appView.framesCount - 1);
 
-                appView.$('[href="#contacts"]').trigger('click');
+                    appView.$('.js-menuLink').removeClass('active');
+                    appView.$('.js-menuLink[data-id="' + (appView.framesCount - 1) + '"]').addClass('active');
+
+                    appView.$('[href="#contacts"]').trigger('click');
+                }, 200);
             }
 
         },
