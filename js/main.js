@@ -186,21 +186,21 @@ $(function() {
 
                 appView.$('.js-section:first').before(appView.$('.js-section:last'));
                 appView.$('.js-framesContainer').css({
-                    'transition': 'none',
-                    'transform': 'translate3d(' + -1 * appView.frameWidth + 'px, 0, 0)'
+                    '-webkit-transition': 'none',
+                    '-webkit-transform': 'translate3d(' + -1 * appView.frameWidth + 'px, 0, 0)'
                 });
 
                 setTimeout(function() {
                     appView.$('.js-framesContainer').css({
-                        'transition': 'transform ' + appView.animationSpeed / 1000 + 's',
-                        'transform': 'translate3d(' + 0 + 'px, 0, 0)'
+                        '-webkit-transition': '-webkit-transform ' + appView.animationSpeed / 1000 + 's',
+                        '-webkit-transform': 'translate3d(' + 0 + 'px, 0, 0)'
                     });
 
                     setTimeout(function() {
                         appView.$('.js-section:last').after(appView.$('.js-section:first'));
                         appView.$('.js-framesContainer').css({
-                            'transition': 'none',
-                            'transform': 'translate3d(' + -(appView.framesCount - 1) * appView.frameWidth + 'px, 0, 0)'
+                            '-webkit-transition': 'none',
+                            '-webkit-transform': 'translate3d(' + -(appView.framesCount - 1) * appView.frameWidth + 'px, 0, 0)'
                         });
                         appView.currentFrame = appView.framesCount - 1;
                     }, appView.animationSpeed);
@@ -234,23 +234,23 @@ $(function() {
             } else {
                 appView.$('.js-section:last').after(appView.$('.js-section:first'));
                 appView.$('.js-framesContainer').css({
-                    'transition': 'none',
-                    'transform': 'translate3d(' + -(appView.framesCount - 2) * appView.frameWidth + 'px, 0, 0)'
+                    '-webkit-transition': 'none',
+                    '-webkit-transform': 'translate3d(' + -(appView.framesCount - 2) * appView.frameWidth + 'px, 0, 0)'
                 });
 
                 setTimeout(function() {
                     appView.currentFrame = 0;
 
                     appView.$('.js-framesContainer').css({
-                        'transition': 'transform ' + appView.animationSpeed / 1000 + 's',
-                        'transform': 'translate3d(' + -(appView.framesCount - 1) * appView.frameWidth + 'px, 0, 0)'
+                        '-webkit-transition': '-webkit-transform ' + appView.animationSpeed / 1000 + 's',
+                        '-webkit-transform': 'translate3d(' + -(appView.framesCount - 1) * appView.frameWidth + 'px, 0, 0)'
                     });
 
                     setTimeout(function() {
                         appView.$('.js-section:first').before(appView.$('.js-section:last'));
                         appView.$('.js-framesContainer').css({
-                            'transition': 'none',
-                            'transform': 'translate3d(' + appView.currentFrame * appView.frameWidth + 'px, 0, 0)'
+                            '-webkit-transition': 'none',
+                            '-webkit-transform': 'translate3d(' + appView.currentFrame * appView.frameWidth + 'px, 0, 0)'
                         });
 
                         setTimeout(function() {
@@ -569,8 +569,8 @@ $(function() {
             }, appView.animationSpeed);*/
 
             appView.$('.js-framesContainer').css({
-                'transform': 'translate3d(' + -frame * appView.frameWidth + 'px, 0, 0)',
-                'transition': 'transform ' + appView.animationSpeed / 1000 + 's'
+                '-webkit-transform': 'translate3d(' + -frame * appView.frameWidth + 'px, 0, 0)',
+                '-webkit-transition': '-webkit-transform ' + appView.animationSpeed / 1000 + 's'
             });
 
             this.setOverlayColor(frame);
