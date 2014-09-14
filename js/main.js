@@ -556,7 +556,8 @@ $(function() {
         activeFrame: 0,
         setActiveFrame: function(frame) {
             appView.$('.js-menuLink').removeClass('active');
-            var $activeMenuLink = appView.$('.js-menuLink[data-id="' + frame + '"]');
+            var $activeMenuLink = appView.$('.js-menuLink[data-id="' + frame + '"]'),
+                self = this;
             $activeMenuLink.addClass('active');
 
 
@@ -573,10 +574,13 @@ $(function() {
                 '-webkit-transition': '-webkit-transform ' + appView.animationSpeed / 1000 + 's'
             });
 
-            this.setOverlayColor(frame);
             this.navigate(App.Routes[frame].route, {
                 trigger: false
             });
+
+            setTimeout(function() {
+                self.setOverlayColor(frame);
+            }, appView.animationSpeed);
         },
         getRouteId: function(routeName) {
             var pageId = null;
