@@ -571,16 +571,15 @@ $(function() {
 
             appView.$('.js-framesContainer').css({
                 '-webkit-transform': 'translate3d(' + -frame * appView.frameWidth + 'px, 0, 0)',
-                '-webkit-transition': '-webkit-transform ' + appView.animationSpeed / 1000 + 's'
+                '-webkit-transition': '-webkit-transform ' + appView.animationSpeed / 1000 + 's',
+                '-webkit-backface-visibility': 'hidden'
             });
 
             this.navigate(App.Routes[frame].route, {
                 trigger: false
             });
 
-            setTimeout(function() {
-                self.setOverlayColor(frame);
-            }, appView.animationSpeed);
+            self.setOverlayColor(frame);
         },
         getRouteId: function(routeName) {
             var pageId = null;
