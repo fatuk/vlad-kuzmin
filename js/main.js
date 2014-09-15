@@ -379,87 +379,42 @@ $(function() {
     });
 
     // News view
-
     App.Views.News = Backbone.View.extend({
-        el: '.js-news',
-        newsPagesCount: 0,
-        newsFrameWidth: 0,
-        newsFrameHeight: 0,
-        currentNewsPage: 0,
-        setSizes: function() {
-            var $newsFrame = this.$('.js-newsFrame'),
-                $newsContainer = this.$('.js-newsContainer');
-
-            $newsContainer.css({
-                'width': this.newsFrameWidth * this.newsPagesCount
-            });
-
-            $newsFrame.css({
-                'width': this.newsFrameWidth,
-                'height': this.newsFrameHeight
-            });
-        },
         initialize: function() {
-            var $newsPage = this.$('.js-newsPage');
+            this.render();
+        },
+        render: function() {
 
-            this.newsPagesCount = $newsPage.length;
-            this.newsFrameWidth = $newsPage.width();
-            this.newsFrameHeight = $newsPage.height();
+        }
+    });
 
-            this.setSizes();
+    // News item view
+    App.Views.NewsItem = Backbone.View.extend({
+        initialize: function() {
+            this.render();
+        },
+        render: function() {
 
-            if (this.newsPagesCount === 1) {
-                this.$('.js-newsArrow').css({
-                    'visibility': 'hidden'
-                });
-            }
+        }
+    });
+
+    // News archive view
+    App.Views.NewsArchive = Backbone.View.extend({
+        initialize: function() {
+            this.render();
         },
-        events: {
-            'click .js-prevNews': 'prev',
-            'click .js-nextNews': 'next'
+        render: function() {
+
+        }
+    });
+
+    // News archive item view
+    App.Views.NewsArchiveItem = Backbone.View.extend({
+        initialize: function() {
+            this.render();
         },
-        setPage: function(id) {
-            var $newsContainer = this.$('.js-newsContainer'),
-                self = this;
-            $newsContainer.animate({
-                'left': -self.newsFrameWidth * id
-            }, appView.animationSpeed);
-        },
-        prev: function(e) {
-            this.currentNewsPage--;
-            if (this.currentNewsPage > 0) {
-                this.setPage(this.currentNewsPage);
-                this.$('.js-newsArrow').css({
-                    'visibility': 'visible'
-                });
-            } else {
-                this.currentNewsPage = 0;
-                this.setPage(this.currentNewsPage);
-                this.$('.js-newsArrow').css({
-                    'visibility': 'visible'
-                });
-                $(e.currentTarget).css({
-                    'visibility': 'hidden'
-                });
-            }
-        },
-        next: function(e) {
-            this.currentNewsPage++;
-            if (this.currentNewsPage < this.newsPagesCount - 1) {
-                this.setPage(this.currentNewsPage);
-                this.$('.js-newsArrow').css({
-                    'visibility': 'visible'
-                });
-            } else {
-                this.currentNewsPage = this.newsPagesCount - 1;
-                this.setPage(this.currentNewsPage);
-                this.$('.js-newsArrow').css({
-                    'visibility': 'visible'
-                });
-                $(e.currentTarget).css({
-                    'visibility': 'hidden'
-                });
-            }
+        render: function() {
+
         }
     });
 
@@ -601,10 +556,6 @@ $(function() {
                 $activeMenuLink.trigger('click');
             }, 300);
 
-            /*appView.$('.js-framesContainer').animate({
-                'left': -frame * appView.frameWidth
-            }, appView.animationSpeed);*/
-
             appView.$('.js-framesContainer').css({
                 '-webkit-transform': 'translate3d(' + -frame * appView.frameWidth + 'px, 0, 0)',
                 '-moz-transform': 'translate3d(' + -frame * appView.frameWidth + 'px, 0, 0)',
@@ -673,59 +624,6 @@ $(function() {
             var id = this.getRouteId('contacts');
             this.setActiveFrame(id);
             appView.currentFrame = id;
-        }
-    });
-
-    // Sprite player view
-
-    App.Views.SpritePlayer = Backbone.View.extend({
-        el: '.js-sprite',
-        events: {
-            'mouseover': 'play',
-            'mouseout': 'stop',
-            'asd': 'show'
-        },
-        framesCount: 0,
-        frameWidth: 0,
-        frameHeight: 0,
-        speed: 0,
-        spriteUrl: null,
-        timer: null,
-        counter: 0,
-        initialize: function() {
-            this.speed = this.$el.data('speed');
-            this.framesCount = this.$el.data('framesCount');
-            this.frameWidth = this.$el.data('frameWidth');
-            this.frameHeight = this.$el.data('frameHeight');
-            this.spriteUrl = this.$el.data('spriteUrl');
-
-            this.$el.css({
-                'width': this.frameWidth,
-                'height': this.frameHeight,
-                'background': 'url(' + this.spriteUrl + ')'
-            });
-        },
-        play: function(e) {
-            var self = this;
-
-            this.timer = setInterval(function() {
-                var $currentSprite = $(e.currentTarget);
-                self.counter++;
-                if (self.counter < self.framesCount) {
-                    $currentSprite.css({
-                        'background-position-x': -self.counter * self.frameWidth
-                    });
-                } else {
-                    self.counter = 0;
-                    $currentSprite.css({
-                        'background-position-x': -self.counter * self.frameWidth
-                    });
-                }
-
-            }, (1 / this.speed) * 10);
-        },
-        stop: function() {
-            clearInterval(this.timer);
         }
     });
 
@@ -825,14 +723,6 @@ $(function() {
         });
 
     var router = new App.Router.App();
-
-    // Sprite player initializing
-    /*$('.js-sprite').each(function(index, el) {
-        spritePlayerView = new App.Views.SpritePlayer({
-            el: $(el)
-        });
-    });*/
-
 
     Backbone.history.start();
 
