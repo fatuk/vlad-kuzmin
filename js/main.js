@@ -57,6 +57,7 @@ $(function() {
             'click .js-slideArrowLeft': 'prevPage',
             'click .js-slideArrowRight': 'nextPage',
             'click .js-showVideoSliderBtn': 'showVideoSlider',
+            'click .js-showPhotoSliderBtn': 'showPhotoSlider',
             'keyup': 'arrowSlide',
             'click .js-menuLink': 'setPointer',
             'click .js-recentNewsBtn': 'renderRecentNews'
@@ -327,6 +328,10 @@ $(function() {
         },
         showVideoSlider: function() {
             this.$('.js-videoSlider').fadeIn('fast');
+        },
+        showPhotoSlider: function() {
+            console.log(234);
+            this.$('.js-photoSlider').fadeIn('fast');
         }
     });
 
@@ -815,6 +820,9 @@ $(function() {
 
     var appView = new App.Views.App(),
         videoSliderView = new App.Views.Slider(),
+        photoSliderView = new App.Views.Slider({
+            el: '.js-photoSlider'
+        }),
         tabsView = new App.Views.Tabs(),
         accordionView = new App.Views.Accordion(),
         galleryView = new App.Views.Gallery({
