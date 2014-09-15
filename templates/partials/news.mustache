@@ -32,25 +32,38 @@
 					</ul>
 				</div>
 			</div>
-			{{! News arrows }}
-			{{! <div class="news__arrow-container">
-				<div class="news__arrow news__arrow_left js-newsArrow js-prevNews">
-					<svg viewBox="0 0 14.974 27.973" class="icon small-arrow-left">
-						<use xlink:href="#small-arrow-left"></use>
-					</svg>
-					<span class="news__arrow-text">
-						Предыдущие новости
-					</span>
-				</div>
-				<div class="news__arrow news__arrow_right js-newsArrow js-nextNews">
-					<span class="news__arrow-text">
-						Следующие новости
-					</span>
-					<svg viewBox="0 0 14.974 27.973" class="icon small-arrow-right">
-						<use xlink:href="#small-arrow-right"></use>
-					</svg>
-				</div>
-			</div> }}
+		</div>
+		{{! Archive }}
+		<div class="btn btn_bottom js-showNewsArchiveBtn">
+			<div class="sprite icon icon-play"></div>
+			<span class="btn__text">
+				Архив
+			</span>
 		</div>
 	</div>
+
+	{{! News item template }}
+	<script type="text/mustache" id="newsItemTemplate" data-url="/json/news.json">
+		<li class="news__item{{#red}} red{{/red}}">
+			<div class="news__date">
+				<img src="img/red-date.svg" alt="" class="news__red-date">
+				<svg viewBox="0 0 80 114" class="icon icon-news-date">
+					<use xlink:href="#news-date"></use>
+				</svg>
+				<div class="news__day-number">{{dayNumber}}</div>
+				<div class="news__month">{{month}}</div>
+			</div>
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							<p class="news__text">
+								{{title_plain}}
+							</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</li>
+	</script>
 </section>

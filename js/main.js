@@ -124,7 +124,7 @@ $(function() {
                 'max-height': this.frameHeight - this.headerHeight - 30 - this.footerHeight - 30
             });
             this.$('.js-newsContainer').css({
-                'max-height': this.frameHeight - this.headerHeight - 30 - this.footerHeight - 50
+                'max-height': this.frameHeight - this.headerHeight - 30 - this.footerHeight - 100
             });
             this.$('.js-galleryContainer').css({
                 'height': this.frameHeight - this.headerHeight - 30 - this.footerHeight - 30
@@ -380,21 +380,34 @@ $(function() {
 
     // News view
     App.Views.News = Backbone.View.extend({
+        el: '.js-newsContainer',
         initialize: function() {
-            this.render();
+            this.collection.on('reset', function() {
+                this.render();
+            }, this);
         },
         render: function() {
-
+            this.$el.html('');
+            this.collection.each(function(newsItem) {
+                var newsItemView = new App.Views.NewsItem({
+                    model: newsItem
+                });
+                this.$el.append(newsItemView.el);
+            }, this);
         }
     });
 
     // News item view
     App.Views.NewsItem = Backbone.View.extend({
+        template: $('#newsItemTemplate').html(),
         initialize: function() {
             this.render();
         },
         render: function() {
-
+            var rendered = Mustache.render(this.template, this.model.toJSON());
+            this.$el.html(rendered);
+            console.log(this.template);
+            return this;
         }
     });
 
@@ -419,7 +432,6 @@ $(function() {
     });
 
     // Tabs view
-
     App.Views.Tabs = Backbone.View.extend({
         el: '.js-tabs',
         events: {
@@ -449,7 +461,6 @@ $(function() {
     });
 
     // Accordion
-
     App.Views.Accordion = Backbone.View.extend({
         el: '.js-accordion',
         events: {
@@ -491,7 +502,6 @@ $(function() {
     });
 
     // Gallery
-
     App.Views.Gallery = Backbone.View.extend({
         el: '.js-gallery',
         initialize: function() {
@@ -703,6 +713,19 @@ $(function() {
     }];
 
     App.Collections.Gallery = Backbone.Collection.extend({});
+    App.Collections.NewsArchive = Backbone.Collection.extend({});
+    App.Collections.News = Backbone.Collection.extend({
+        url: $('#newsItemTemplate').data('url'),
+        parse: function(response) {
+            console.log(response.posts);
+            return response.posts;
+        },
+        initialize: function() {
+            this.fetch({
+                reset: true
+            });
+        }
+    });
 
 
     /*****************
@@ -711,15 +734,19 @@ $(function() {
      *
      ******************/
 
-    var galleryCollection = new App.Collections.Gallery(galleryData);
+    var galleryCollection = new App.Collections.Gallery(galleryData),
+        newsArchiveCollection = new App.Collections.NewsArchive(),
+        newsCollection = new App.Collections.News();
 
     var appView = new App.Views.App(),
         videoSliderView = new App.Views.Slider(),
-        newsView = new App.Views.News(),
         tabsView = new App.Views.Tabs(),
         accordionView = new App.Views.Accordion(),
         galleryView = new App.Views.Gallery({
             collection: galleryCollection
+        }),
+        newsView = new App.Views.News({
+            collection: newsCollection
         });
 
     var router = new App.Router.App();
