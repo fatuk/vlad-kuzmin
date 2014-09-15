@@ -111,7 +111,6 @@ $(function() {
 
             setTimeout(function() {
                 self.setSizes();
-                newsView.setSizes();
                 router.setActiveFrame(self.currentFrame);
                 // Uodate custom scroll
                 appView.$('.js-scroll').perfectScrollbar('update');
