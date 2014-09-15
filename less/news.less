@@ -13,6 +13,7 @@
 		float: left;
 		width: 440px;
 		margin-bottom: 50px;
+		position: relative;
 		.icon {
 			width: 80px;
 		}
@@ -22,9 +23,12 @@
 		&:nth-last-child(2) {
 			margin-bottom: 0;
 		}
-		&.red {
-			.news__red-date {
-				display: block;
+		&_archive {
+			width: 80px;
+			margin-right: 80px;
+			margin-bottom: 50px !important;
+			&:nth-child(6n) {
+				margin-right: 0;
 			}
 		}
 	}
@@ -45,6 +49,34 @@
 			position: relative;
 			z-index: 5;
 		}
+	}
+	&__link {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		display: inline-block;
+		&:before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 10;
+		}
+	}
+	&__year {
+		position: absolute;
+		width: 100%;
+		text-align: center;
+		top: 15px;
+		left: 0;
+		color: #fff;
+		.ristretto();
+		font-size: 48px;
+		.non-select();
+		cursor: default;
+		z-index: 5;
 	}
 	&__day-number {
 		position: absolute;
@@ -73,7 +105,6 @@
 		cursor: default;
 	}
 	&__red-date {
-		display: none;
 		position: absolute;
 		left: 0;
 		top: 0;

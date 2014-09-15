@@ -380,7 +380,7 @@ $(function() {
 
     // News view
     App.Views.News = Backbone.View.extend({
-        el: '.js-newsContainer',
+        el: '.js-newsPage',
         initialize: function() {
             this.collection.on('reset', function() {
                 this.render();
@@ -400,34 +400,78 @@ $(function() {
     // News item view
     App.Views.NewsItem = Backbone.View.extend({
         template: $('#newsItemTemplate').html(),
+        tagName: 'li',
+        className: 'news__item',
         initialize: function() {
             this.render();
         },
         render: function() {
+            var date = this.model.get('date'),
+                slug = this.model.get('categories')[0].slug;
+            // Set day number and month
+            this.model.set('dayNumber', moment(date).format('DD'));
+            this.model.set('month', moment(date).format('MMMM'));
+            // Set important from slug
+            if (slug === 'important') {
+                this.model.set('important', true);
+            }
+
             var rendered = Mustache.render(this.template, this.model.toJSON());
             this.$el.html(rendered);
-            console.log(this.template);
             return this;
         }
     });
 
     // News archive view
     App.Views.NewsArchive = Backbone.View.extend({
+        el: '.js-newsView',
+        events: {
+            'click .js-showNewsArchiveBtn': 'showArchive',
+            'click .js-newsArchiveBtn': 'openArchiveItem'
+        },
+        openArchiveItem: function(e) {
+            e.preventDefault();
+            newsCollection.fetch({
+                url: $(e.currentTarget).attr('href'),
+                reset: true
+            });
+        },
+        showArchive: function(e) {
+            var url = $(e.currentTarget).data('url');
+            this.collection.url = url;
+            this.collection.fetch({
+                reset: true
+            });
+        },
         initialize: function() {
-            this.render();
+            this.collection.on('reset', function() {
+                this.render();
+            }, this);
         },
         render: function() {
+            this.$('.js-newsPage').html('');
+            this.collection.each(function(newsArchiveItem) {
+                var newsArchiveItemView = new App.Views.NewsArchiveItem({
+                    model: newsArchiveItem
+                });
 
+                this.$('.js-newsPage').append(newsArchiveItemView.el);
+            });
         }
     });
 
     // News archive item view
     App.Views.NewsArchiveItem = Backbone.View.extend({
+        template: $('#newsArchiveItemTemplate').html(),
+        tagName: 'li',
+        className: 'news__item news__item_archive',
         initialize: function() {
             this.render();
         },
         render: function() {
-
+            var rendered = Mustache.render(this.template, this.model.toJSON());
+            this.$el.html(rendered);
+            return this;
         }
     });
 
@@ -713,11 +757,22 @@ $(function() {
     }];
 
     App.Collections.Gallery = Backbone.Collection.extend({});
-    App.Collections.NewsArchive = Backbone.Collection.extend({});
+    App.Collections.NewsArchive = Backbone.Collection.extend({
+        parse: function(response) {
+            return _.map(response.permalinks, function(item) {
+                return {
+                    date: moment(item.split('=')[1], 'YYYYMM').format('YYYY-MM'),
+                    year: moment(item.split('=')[1], 'YYYYMM').format('YYYY'),
+                    month: moment(item.split('=')[1], 'YYYYMM').format('MMMM'),
+                    // link: '/wp/?json=get_date_posts&date=' + moment(item.split('=')[1], 'YYYYMM').format('YYYY-MM')
+                    link: '/json/news2.json'
+                };
+            });
+        },
+    });
     App.Collections.News = Backbone.Collection.extend({
         url: $('#newsItemTemplate').data('url'),
         parse: function(response) {
-            console.log(response.posts);
             return response.posts;
         },
         initialize: function() {
@@ -747,6 +802,9 @@ $(function() {
         }),
         newsView = new App.Views.News({
             collection: newsCollection
+        }),
+        newsArchiveView = new App.Views.NewsArchive({
+            collection: newsArchiveCollection
         });
 
     var router = new App.Router.App();
