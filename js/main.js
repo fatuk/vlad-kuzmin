@@ -87,7 +87,7 @@ $(function() {
                 $pointer = this.$('.js-menuPointer'),
                 menuItemWidth = $currentTarget.outerWidth(),
                 menuItemPosition = $currentTarget.position().left;
-
+            console.log('set pointer');
             $pointer.css({
                 'left': menuItemPosition + (menuItemWidth / 2) - 5
             });
@@ -187,6 +187,8 @@ $(function() {
             if (appView.currentFrame >= 0) {
                 router.setActiveFrame(appView.currentFrame);
 
+                appView.$('.js-menuLink[data-id="' + appView.currentFrame + '"]').trigger('click');
+
                 // To prevent dbl click
                 setTimeout(function() {
                     appView.$el.delegate('.js-slideArrowLeft', 'click', function() {
@@ -260,6 +262,8 @@ $(function() {
             this.$el.undelegate('.js-slideArrowRight', 'click');
             if (appView.currentFrame < appView.framesCount) {
                 router.setActiveFrame(appView.currentFrame);
+
+                appView.$('.js-menuLink[data-id="' + appView.currentFrame + '"]').trigger('click');
 
                 setTimeout(function() {
                     appView.$el.delegate('.js-slideArrowRight', 'click keyup', function() {
