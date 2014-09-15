@@ -58,7 +58,8 @@ $(function() {
             'click .js-slideArrowRight': 'nextPage',
             'click .js-showVideoSliderBtn': 'showVideoSlider',
             'keyup': 'arrowSlide',
-            'click .js-menuLink': 'setPointer'
+            'click .js-menuLink': 'setPointer',
+            'click .js-recentNewsBtn': 'renderRecentNews'
         },
         frameWidth: 0,
         frameHeight: 0,
@@ -67,7 +68,20 @@ $(function() {
         headerHeight: 0,
         footerHeight: 0,
         animationSpeed: 500,
+        renderRecentNews: function(e) {
+            var $currentTarget = $(e.currentTarget);
+
+            if ($currentTarget.hasClass('active')) {
+                newsCollection.fetch({
+                    url: $currentTarget.data('url'),
+                    reset: true
+                });
+            } else {
+                $currentTarget.addClass('active');
+            }
+        },
         setPointer: function(e) {
+            e.stopPropagation();
             var $currentTarget = $(e.currentTarget),
                 $pointer = this.$('.js-menuPointer'),
                 menuItemWidth = $currentTarget.outerWidth(),
@@ -76,6 +90,9 @@ $(function() {
             $pointer.css({
                 'left': menuItemPosition + (menuItemWidth / 2) - 5
             });
+
+            // Reset active class for recent news btn
+            this.$('.js-menuItem').removeClass('active');
         },
         getFramesInfo: function() {
             var $window = $(window);
@@ -124,7 +141,7 @@ $(function() {
                 'max-height': this.frameHeight - this.headerHeight - 30 - this.footerHeight - 30
             });
             this.$('.js-newsContainer').css({
-                'max-height': this.frameHeight - this.headerHeight - 30 - this.footerHeight - 100
+                'height': this.frameHeight - this.headerHeight - 30 - this.footerHeight - 100
             });
             this.$('.js-galleryContainer').css({
                 'height': this.frameHeight - this.headerHeight - 30 - this.footerHeight - 30
@@ -599,16 +616,19 @@ $(function() {
             '*path': 'home'
         },
         activeFrame: 0,
+        isActiveMenuItemSet: false,
         setActiveFrame: function(frame) {
             appView.$('.js-menuLink').removeClass('active');
             var $activeMenuLink = appView.$('.js-menuLink[data-id="' + frame + '"]'),
                 self = this;
             $activeMenuLink.addClass('active');
 
-
-            setTimeout(function() {
-                $activeMenuLink.trigger('click');
-            }, 300);
+            if (!this.isActiveMenuItemSet) {
+                setTimeout(function() {
+                    $activeMenuLink.trigger('click');
+                }, 300);
+                this.isActiveMenuItemSet = true;
+            }
 
             appView.$('.js-framesContainer').css({
                 '-webkit-transform': 'translate3d(' + -frame * appView.frameWidth + 'px, 0, 0)',
