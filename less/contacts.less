@@ -24,20 +24,17 @@
 		color: #fff;
 		float: left;
 		margin-right: 70px;
+		&:hover {
+			.icon {
+				animation-play-state: running;
+			}
+		}
 		.icon {
-			width: 32px;
-			height: 35px;
 			margin-right: 20px;
 			margin-top: -10px;
 			display: inline-block;
-		}
-		&:hover {
-			.contacts__phone-text {
-				color: @blue;
-			}
-			.icon {
-				fill: @blue;
-			}
+			animation: phone .8s steps(11) infinite;
+			animation-play-state: paused;
 		}
 	}
 	&__phone-text {
@@ -69,19 +66,16 @@
 		margin-top: 5px;
 		float: left;
 		.icon {
-			width: 35px;
-			height: 26px;
 			margin-right: 10px;
 			display: inline-block;
 			vertical-align: middle;
 			margin-top: -8px;
+			animation: phone .8s steps(45) infinite;
+			animation-play-state: paused;
 		}
 		&:hover {
-			.contacts__email-text {
-				color: @blue;
-			}
 			.icon {
-				fill: @blue;
+				animation-play-state: running;
 			}
 		}
 	}
