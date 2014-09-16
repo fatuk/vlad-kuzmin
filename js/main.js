@@ -1,6 +1,4 @@
 $(function() {
-    // WOW css animation init
-    // new WOW().init();
 
     var App = {};
     App.Collections = {};
@@ -87,7 +85,6 @@ $(function() {
                 $pointer = this.$('.js-menuPointer'),
                 menuItemWidth = $currentTarget.outerWidth(),
                 menuItemPosition = $currentTarget.position().left;
-            console.log('set pointer');
             $pointer.css({
                 'left': menuItemPosition + (menuItemWidth / 2) - 5
             });
@@ -98,7 +95,7 @@ $(function() {
         getFramesInfo: function() {
             var $window = $(window);
             this.frameWidth = $window.width() >= 940 ? $window.width() : 940;
-            this.frameHeight = $window.height() >= 680 ? $window.height() : 680;
+            this.frameHeight = $window.height() >= 680 ? $window.height() : 620;
             this.framesCount = this.$('.js-section').length;
 
             this.headerHeight = this.$('.js-siteHeader').height();
@@ -159,7 +156,13 @@ $(function() {
             this.$('.js-article').columnize({
                 columns: 3,
                 lastNeverTallest: true,
-                buildOnce: true
+                buildOnce: true,
+                doneFunc: function(e) {
+                    self.$('.column').addClass('wow fadeIn');
+                    self.$('.column').each(function(index, el) {
+                        $(el).attr('data-wow-delay', 0.4 * (index + 0.2) + 's');
+                    });
+                }
             });
 
             this.$('.js-scroll').perfectScrollbar();
@@ -638,6 +641,10 @@ $(function() {
                 this.isActiveMenuItemSet = true;
             }
 
+            // WOW css animation init
+            $('.animated').removeClass('animated');
+            new WOW().init();
+
             appView.$('.js-framesContainer').css({
                 '-webkit-transform': 'translate3d(' + -frame * appView.frameWidth + 'px, 0, 0)',
                 '-moz-transform': 'translate3d(' + -frame * appView.frameWidth + 'px, 0, 0)',
@@ -646,8 +653,7 @@ $(function() {
                 '-webkit-transition': 'transform ' + appView.animationSpeed / 1000 + 's',
                 '-moz-transition': 'transform ' + appView.animationSpeed / 1000 + 's',
                 '-ms-transition': 'transform ' + appView.animationSpeed / 1000 + 's',
-                'transition': 'transform ' + appView.animationSpeed / 1000 + 's',
-                '-webkit-backface-visibility': 'hidden'
+                'transition': 'transform ' + appView.animationSpeed / 1000 + 's'
             });
 
             this.navigate(App.Routes[frame].route, {

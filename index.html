@@ -17,6 +17,8 @@
 	<script>
 		Pace.on('done', function() {
 			document.getElementById('loadingFade').style.display = "none";
+			// WOW css animation init
+			// new WOW().init();
 		});
 	</script>
 	<div class="hide">
@@ -84,26 +86,28 @@
 			<div class="color-overlay js-colorOverlay"></div>
 <section class="section section_home js-section" data-frame="home">
 	<div class="container container_logo">
-		<svg viewBox="0 0 590 226" class="icon icon-logo">
-			<use xlink:href="#logo"></use>
-		</svg>
+		<div class="wow flipInX">
+			<svg viewBox="0 0 590 226" class="icon icon-logo">
+				<use xlink:href="#logo"></use>
+			</svg>
+		</div>
 		<div class="links">
 			<table class="links__list">
 				<tbody>
 					<tr>
-						<td class="links__item">
+						<td class="links__item wow bounceInUp">
 							<div class="links__item-inner">
 								<div class="links__icon">
 									<div class="sprite icon icon-showreal"></div>
 								</div>
 								<div class="links__text">
 									<div class="links__text-inner">
-										Showreal
+										Showreel
 									</div>
 								</div>
 							</div>
 						</td>
-						<td class="links__item">
+						<td class="links__item wow bounceInUp" data-wow-delay="0.1s">
 							<div class="links__item-inner">
 								<div class="links__icon">
 									<div class="sprite icon icon-bomb"></div>
@@ -115,7 +119,7 @@
 								</div>
 							</div>
 						</td>
-						<td class="links__item">
+						<td class="links__item wow bounceInUp" data-wow-delay="0.2s">
 							<div class="links__item-inner">
 								<div class="links__icon">
 									<div class="sprite icon icon-boot"></div>
@@ -154,7 +158,7 @@
 				Влад не раз ездил в Америку, где, собственно, и зародилась Хип-Хоп культура, посещал классы в лучших студиях Нью-Йорка и Лос-Анджелеса. Его сила и энергия, страсть и любовь к танцу сделали его не только уважаемым танцором, но и востребованным преподавателем, способным передать ученикам частичку себя и мотивировать их всегда достигать максимума. Это его жизнь. Жизнь для танца.
 			</p>
 		</article>
-		<div class="btn btn_bottom js-showVideoSliderBtn">
+		<div class="btn btn_bottom js-showVideoSliderBtn wow bounceInUp" data-wow-delay="0.2s">
 			<div class="sprite icon icon-play"></div>
 			<span class="btn__text">
 				Демонстрационное видео
@@ -167,7 +171,7 @@
 			<table class="links__list">
 				<tbody>
 					<tr>
-						<td class="links__item">
+						<td class="links__item wow bounceInUp">
 							<div class="links__item-inner js-showPhotoSliderBtn">
 								<div class="links__icon">
 									<div class="sprite icon icon-photo"></div>
@@ -179,7 +183,7 @@
 								</div>
 							</div>
 						</td>
-						<td class="links__item">
+						<td class="links__item wow bounceInUp" data-wow-delay="0.1s">
 							<div class="links__item-inner">
 								<div class="links__icon">
 									<div class="sprite icon icon-video"></div>
@@ -201,19 +205,19 @@
 		<div class="tabs js-tabs">
 			<div class="tabs__navigation">
 				<ul class="tabs__navigation-list">
-					<li class="tabs__navigation-item">
+					<li class="tabs__navigation-item wow bounceInDown">
 						<a href="#tab-1" class="tabs__navigation-link active js-tabBtn">
 							<img src="img/mirazh.png" alt="" class="tabs__navigation-img">
 						</a>
 					</li>
-					<li class="tabs__navigation-item">
+					<li class="tabs__navigation-item wow bounceInDown" data-wow-delay="0.3s">
 						<a href="#tab-2" class="tabs__navigation-link js-tabBtn">
 							<img src="img/pride.png" alt="" class="tabs__navigation-img">
 						</a>
 					</li>
 				</ul>
 			</div>
-			<div class="tabs__content">
+			<div class="tabs__content wow rotateInUpLeft" data-wow-delay="0.6s">
 				<ul class="tabs__content-list">
 					<li class="tabs__content-item js-tabsContent js-scroll" id="tab-1">
 						<p class="tabs__text">
@@ -356,10 +360,10 @@
 </section><section class="section section_contacts js-section" data-frame="contacts">
 	<div class="container js-container">
 		<div class="contacts">
-			<p class="contacts__text">
+			<p class="contacts__text wow bounceInUp">
 				По вопросам сотрудничества,<br>организации и проведения мастер классов:
 			</p>
-			<div class="contacts__container">
+			<div class="contacts__container wow bounceInUp" data-wow-delay="0.1s">
 				<div class="contacts__phone">
 					<a href="phone:+7 (926) 644-69-65" class="contacts__phone-text">
 					<div class="sprite icon icon-phone"></div>
@@ -381,7 +385,7 @@
 					</a>
 				</div>
 			</div>
-			<div class="contacts__motto">
+			<div class="contacts__motto wow bounceInUp" data-wow-delay="0.2s">
 				<img src="img/lets-do-it-together.png" alt="lets do it together" class="contacts__motto-img">
 				<div class="contacts__motto-text">
 					Let's do it together!
@@ -451,13 +455,10 @@
 	<div class="slider__inner">
 		<ul class="slider__list js-sliderContainer">
 			<li class="slider__item js-sliderItem" id="s1">
-				<iframe width="854" height="510" src="//www.youtube.com/embed/bWnnJaldsvw" frameborder="0" allowfullscreen></iframe>
 			</li>
 			<li class="slider__item js-sliderItem"  id="s2">
-				<iframe width="854" height="510" src="//www.youtube.com/embed/tPRVadcNuYM" frameborder="0" allowfullscreen></iframe>
 			</li>
 			<li class="slider__item js-sliderItem"  id="s3">
-				<iframe width="854" height="510" src="//www.youtube.com/embed/plAvSvfdSYA" frameborder="0" allowfullscreen></iframe>
 			</li>
 		</ul>
 	</div>
@@ -490,9 +491,7 @@
 		</ul>
 	</div>
 	<div class="slider__close js-closeBtn">
-		<svg viewBox="0 0 50 50" class="icon icon-close">
-			<use xlink:href="#close"></use>
-		</svg>
+		<div class="sprite icon icon-close"></div>
 	</div>
 </div>	<script src="vendors/plugins.min.js"></script>
 	<script src="js/main.js"></script>
