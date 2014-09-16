@@ -24,6 +24,7 @@
     "pace": "~0.5.6",
     "jquery.columnizer": "~1.6.1",
     "perfect-scrollbar": "~0.4.11",
-    "momentjs": "~2.8.3"
+    "momentjs": "~2.8.3",
+    "jquery-colorbox": "~1.5.14"
   }
 }

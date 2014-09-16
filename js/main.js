@@ -336,7 +336,6 @@ $(function() {
             this.$('.js-videoSlider').fadeIn('fast');
         },
         showPhotoSlider: function() {
-            console.log(234);
             this.$('.js-photoSlider').fadeIn('fast');
         }
     });
@@ -421,7 +420,6 @@ $(function() {
                     model: newsItem
                 });
                 newsItemView.$el.attr('data-wow-delay', index * 0.3 + 's');
-                console.log(newsItemView.el);
                 this.$el.append(newsItemView.el);
             }, this);
             router.resetWow();
@@ -650,6 +648,7 @@ $(function() {
             }
 
             // WOW css animation init
+            console.log('set active frame');
             this.resetWow();
 
             appView.$('.js-framesContainer').css({

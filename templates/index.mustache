@@ -6,6 +6,7 @@
 	<script data-pace-options='{ "ajax": true, "document": true, "elements": ["img"] }' src="js/pace.min.js"></script>
 	<link rel="stylesheet" href="css/pace-theme-loading-bar.css">
 	<link rel="stylesheet" href="css/perfect-scrollbar.min.css">
+	<link rel="stylesheet" href="css/colorbox.css">
 	<link rel="stylesheet" href="css/main.css">
 	<!--[if lt IE 9]>
 	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -17,12 +18,22 @@
 	<script>
 		Pace.on('done', function() {
 			document.getElementById('loadingFade').style.display = "none";
-			// WOW css animation init
-			// new WOW().init();
 		});
 	</script>
 	<div class="hide">
 		{{>svg-icons}}
+		<a href="http://findfood.ru/attaches/product/ovoshi/pomidor.jpg" class="gallery__link" rel="test">
+			<span class="gallery__icon">
+				<div class="sprite icon icon-zoom-in"></div>
+			</span>
+			<div class="gallery__img" style="background: url(img/photo-1.jpg) 50% center no-repeat; background-size: cover;"></div>
+		</a>
+		<a href="img/photo-1.jpg" class="gallery__link" rel="test">
+			<span class="gallery__icon">
+				<div class="sprite icon icon-zoom-in"></div>
+			</span>
+			<div class="gallery__img" style="background: url(img/photo-1.jpg) 50% center no-repeat; background-size: cover;"></div>
+		</a>
 	</div>
 	<div class="wrapper js-frame">
 		{{>header}}
