@@ -117,6 +117,7 @@ $(function() {
             }, 700);
         },
         setSizes: function() {
+            var self = this;
             this.getFramesInfo();
 
             this.$('.js-framesContainer').css({
@@ -127,6 +128,12 @@ $(function() {
                 'width': this.frameWidth,
                 'height': this.frameHeight
             });
+            this.$('.js-section').each(function(index, el) {
+                $(el).css({
+                    'left': index * self.frameWidth
+                });
+            });
+
             this.$('.js-container').css({
                 'height': this.frameHeight - this.headerHeight - 30 - this.footerHeight,
                 'margin-top': this.headerHeight + 30
@@ -260,6 +267,7 @@ $(function() {
 
         },
         nextPage: function() {
+            var self = this;
             appView.currentFrame++;
             // To prevent dbl click
             this.$el.undelegate('.js-slideArrowRight', 'click');
@@ -274,7 +282,18 @@ $(function() {
                     });
                 }, 300);
             } else {
-                appView.$('.js-section:last').after(appView.$('.js-section:first'));
+                appView.$('.js-section').each(function(index, el) {
+                    if (index === 0) {
+                        $(el).css({
+                            'left': (self.framesCount - 1) * self.frameWidth
+                        });
+                    } else {
+                        $(el).css({
+                            'left': (index - 1) * self.frameWidth
+                        });
+                    }
+                });
+
                 appView.$('.js-framesContainer').css({
                     '-webkit-transition': 'none',
                     '-moz-transition': 'none',
@@ -301,7 +320,11 @@ $(function() {
                     });
 
                     setTimeout(function() {
-                        appView.$('.js-section:first').before(appView.$('.js-section:last'));
+                        appView.$('.js-section').each(function(index, el) {
+                            $(el).css({
+                                'left': index * self.frameWidth
+                            });
+                        });
                         appView.$('.js-framesContainer').css({
                             '-webkit-transition': 'none',
                             '-moz-transition': 'none',
@@ -329,6 +352,8 @@ $(function() {
 
                     appView.$('.js-menuLink').removeClass('active');
                     appView.$('.js-menuLink[data-id="0"]').addClass('active');
+
+                    router.resetWow();
                 }, 200);
             }
         },
