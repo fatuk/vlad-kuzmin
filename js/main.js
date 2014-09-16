@@ -206,6 +206,7 @@ $(function() {
                     });
                 }, 300);
             } else {
+                var self = this;
                 // To prevent dbl click
                 setTimeout(function() {
                     appView.$el.delegate('.js-slideArrowLeft', 'click keyup', function() {
@@ -213,7 +214,18 @@ $(function() {
                     });
                 }, 300);
 
-                appView.$('.js-section:first').before(appView.$('.js-section:last'));
+                appView.$('.js-section').each(function(index, el) {
+                    if (index === self.framesCount - 1) {
+                        $(el).css({
+                            'left': 0 * self.frameWidth
+                        });
+                    } else {
+                        $(el).css({
+                            'left': (index + 1) * self.frameWidth
+                        });
+                    }
+                });
+
                 appView.$('.js-framesContainer').css({
                     '-webkit-transition': 'none',
                     '-moz-transition': 'none',
@@ -238,7 +250,12 @@ $(function() {
                     });
 
                     setTimeout(function() {
-                        appView.$('.js-section:last').after(appView.$('.js-section:first'));
+                        appView.$('.js-section').each(function(index, el) {
+                            $(el).css({
+                                'left': index * self.frameWidth
+                            });
+                        });
+
                         appView.$('.js-framesContainer').css({
                             '-webkit-transition': 'none',
                             '-moz-transition': 'none',
@@ -673,7 +690,6 @@ $(function() {
             }
 
             // WOW css animation init
-            console.log('set active frame');
             this.resetWow();
 
             appView.$('.js-framesContainer').css({
