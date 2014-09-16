@@ -158,9 +158,9 @@ $(function() {
                 lastNeverTallest: true,
                 buildOnce: true,
                 doneFunc: function(e) {
-                    self.$('.column').addClass('wow fadeIn');
+                    self.$('.column').addClass('wow bounceInDown');
                     self.$('.column').each(function(index, el) {
-                        $(el).attr('data-wow-delay', 0.4 * (index + 0.2) + 's');
+                        $(el).attr('data-wow-delay', 0.3 * (index + 0.3) + 's');
                     });
                 }
             });
@@ -416,12 +416,15 @@ $(function() {
         },
         render: function() {
             this.$el.html('');
-            this.collection.each(function(newsItem) {
+            this.collection.each(function(newsItem, index) {
                 var newsItemView = new App.Views.NewsItem({
                     model: newsItem
                 });
+                newsItemView.$el.attr('data-wow-delay', index * 0.3 + 's');
+                console.log(newsItemView.el);
                 this.$el.append(newsItemView.el);
             }, this);
+            router.resetWow();
         }
     });
 
@@ -429,7 +432,7 @@ $(function() {
     App.Views.NewsItem = Backbone.View.extend({
         template: $('#newsItemTemplate').html(),
         tagName: 'li',
-        className: 'news__item',
+        className: 'news__item wow rollIn',
         initialize: function() {
             this.render();
         },
@@ -478,13 +481,14 @@ $(function() {
         },
         render: function() {
             this.$('.js-newsPage').html('');
-            this.collection.each(function(newsArchiveItem) {
+            this.collection.each(function(newsArchiveItem, index) {
                 var newsArchiveItemView = new App.Views.NewsArchiveItem({
                     model: newsArchiveItem
                 });
-
+                newsArchiveItemView.$el.attr('data-wow-delay', index * 0.3 + 's');
                 this.$('.js-newsPage').append(newsArchiveItemView.el);
             });
+            router.resetWow();
         }
     });
 
@@ -492,7 +496,7 @@ $(function() {
     App.Views.NewsArchiveItem = Backbone.View.extend({
         template: $('#newsArchiveItemTemplate').html(),
         tagName: 'li',
-        className: 'news__item news__item_archive',
+        className: 'news__item news__item_archive wow rollIn',
         initialize: function() {
             this.render();
         },
@@ -628,6 +632,10 @@ $(function() {
         },
         activeFrame: 0,
         isActiveMenuItemSet: false,
+        resetWow: function() {
+            $('.animated').removeClass('animated');
+            new WOW().init();
+        },
         setActiveFrame: function(frame) {
             appView.$('.js-menuLink').removeClass('active');
             var $activeMenuLink = appView.$('.js-menuLink[data-id="' + frame + '"]'),
@@ -642,8 +650,7 @@ $(function() {
             }
 
             // WOW css animation init
-            $('.animated').removeClass('animated');
-            new WOW().init();
+            this.resetWow();
 
             appView.$('.js-framesContainer').css({
                 '-webkit-transform': 'translate3d(' + -frame * appView.frameWidth + 'px, 0, 0)',
