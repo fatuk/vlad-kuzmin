@@ -95,7 +95,7 @@ $(function() {
         getFramesInfo: function() {
             var $window = $(window);
             this.frameWidth = $window.width() >= 940 ? $window.width() : 940;
-            this.frameHeight = $window.height() >= 680 ? $window.height() : 620;
+            this.frameHeight = $window.height() >= 620 ? $window.height() : 620;
             this.framesCount = this.$('.js-section').length;
 
             this.headerHeight = this.$('.js-siteHeader').height();
@@ -133,7 +133,6 @@ $(function() {
                     'left': index * self.frameWidth
                 });
             });
-
             this.$('.js-container').css({
                 'height': this.frameHeight - this.headerHeight - 30 - this.footerHeight,
                 'margin-top': this.headerHeight + 30
