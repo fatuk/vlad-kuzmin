@@ -173,6 +173,10 @@ $(function() {
 
             this.$('.js-scroll').perfectScrollbar();
 
+            setTimeout(function() {
+                // self.$('.js-framesContainer').prepend('<div class="color-overlay js-colorOverlay"></div>');
+            }, 3000);
+
         },
         setRoute: function(id) {
             router.navigate(App.Routes[id].route, {

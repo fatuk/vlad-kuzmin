@@ -39,6 +39,9 @@
 	&__phone-text {
 		text-decoration: none;
 		transition: color .3s;
+		& [href*="tel:"] {
+			text-decoration: none;
+		}
 	}
 	&__aim {
 		float: left;
