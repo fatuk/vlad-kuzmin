@@ -238,9 +238,9 @@ $(function() {
 
                 setTimeout(function() {
                     appView.$('.js-framesContainer').css({
-                        '-webkit-transition': 'transform ' + appView.animationSpeed / 1000 + 's',
-                        '-moz-transition': 'transform ' + appView.animationSpeed / 1000 + 's',
-                        '-ms-transition': 'transform ' + appView.animationSpeed / 1000 + 's',
+                        '-webkit-transition': '-webkit-transform ' + appView.animationSpeed / 1000 + 's',
+                        '-moz-transition': '-moz-transform ' + appView.animationSpeed / 1000 + 's',
+                        '-ms-transition': '-ms-transform ' + appView.animationSpeed / 1000 + 's',
                         'transition': 'transform ' + appView.animationSpeed / 1000 + 's',
                         '-webkit-transform': 'translate3d(' + 0 + 'px, 0, 0)',
                         '-moz-transform': 'translate3d(' + 0 + 'px, 0, 0)',
@@ -325,9 +325,9 @@ $(function() {
                     appView.currentFrame = 0;
 
                     appView.$('.js-framesContainer').css({
-                        '-webkit-transition': 'transform ' + appView.animationSpeed / 1000 + 's',
-                        '-moz-transition': 'transform ' + appView.animationSpeed / 1000 + 's',
-                        '-ms-transition': 'transform ' + appView.animationSpeed / 1000 + 's',
+                        '-webkit-transition': '-webkit-transform ' + appView.animationSpeed / 1000 + 's',
+                        '-moz-transition': '-moz-transform ' + appView.animationSpeed / 1000 + 's',
+                        '-ms-transition': '-ms-transform ' + appView.animationSpeed / 1000 + 's',
                         'transition': 'transform ' + appView.animationSpeed / 1000 + 's',
                         '-webkit-transform': 'translate3d(' + -(appView.framesCount - 1) * appView.frameWidth + 'px, 0, 0)',
                         '-moz-transform': 'translate3d(' + -(appView.framesCount - 1) * appView.frameWidth + 'px, 0, 0)',
@@ -696,9 +696,9 @@ $(function() {
                 '-moz-transform': 'translate3d(' + -frame * appView.frameWidth + 'px, 0, 0)',
                 '-ms-transform': 'translate3d(' + -frame * appView.frameWidth + 'px, 0, 0)',
                 'transform': 'translate3d(' + -frame * appView.frameWidth + 'px, 0, 0)',
-                '-webkit-transition': 'transform ' + appView.animationSpeed / 1000 + 's',
-                '-moz-transition': 'transform ' + appView.animationSpeed / 1000 + 's',
-                '-ms-transition': 'transform ' + appView.animationSpeed / 1000 + 's',
+                '-webkit-transition': '-webkit-transform ' + appView.animationSpeed / 1000 + 's',
+                '-moz-transition': '-moz-transform ' + appView.animationSpeed / 1000 + 's',
+                '-ms-transition': '-ms-transform ' + appView.animationSpeed / 1000 + 's',
                 'transition': 'transform ' + appView.animationSpeed / 1000 + 's'
             });
 
