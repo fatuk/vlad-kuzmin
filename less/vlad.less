@@ -1,5 +1,10 @@
 .vlad {
-	position: relative;
+	position: absolute;
+	left: 50%;
+	top: 0;
+	width: 656px;
+	height: 847px;
+	margin-left: -(490px / 2);
 	z-index: 5;
 	&__list {
 		list-style: none;
@@ -7,10 +12,22 @@
 		margin: 0;
 	}
 	&__item {
-
+		position: absolute;
+		left: 0;
+		top: 0;
+		transition: transform 1s;
+		z-index: 5;
+		&_left {
+			transform: translate3d(-200px, 0, 0);
+			z-index: 2;
+		}
+		&_right {
+			transform: translate3d(200px, 0, 0);
+			z-index: 2;
+		}
 	}
 	&__img {
-		width: 490px;
-		height: 843px;
+		width: 656px;
+		height: 847px;
 	}
 }
