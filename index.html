@@ -17,7 +17,7 @@
 <body>
 	<div class="loading-fade js-loadingFade" id="loadingFade">
 		<ul class="loading-fade__list">
-			<li class="loading-fade__item loading-fade__item_up js-loadingItem"></li>
+			<li class="loading-fade__item loading-fade__item_up js-loadingItem js-loadingItemLogo"></li>
 			<li class="loading-fade__item loading-fade__item_down js-loadingItem"></li>
 		</ul>
 	</div>
@@ -25,8 +25,9 @@
 		Pace.on('done', function() {
 			var $loadingFade = $('#loadingFade');
 
+			$loadingFade.addClass('animated myFadeOut');
+
 			var openSite = function() {
-				console.log('open site');
 				$loadingFade.find('.js-loadingItem').eq(0).css({
 					'transform': 'translate3d(0,-100%,0)',
 					'-webkit-transform': 'translate3d(0,-100%,0)'
@@ -38,9 +39,14 @@
 			};
 
 			setTimeout(function() {
-				$('.pace-inactive').addClass('animated myFadeOut');
+				$('.js-loadingItemLogo').append('<img src="img/logo_animation.gif" alt="Влад Кузьмин" class="loading-fade__logo">');
+			}, 1000);
+
+
+			setTimeout(function() {
+				$('.pace-inactive').addClass('animated progressFadeOut');
 				openSite();
-			}, 2000);
+			}, 4400);
 
 
 		});
@@ -122,7 +128,7 @@
 			<div class="color-overlay js-colorOverlay"></div>
 <section class="section section_home js-section" data-frame="home">
 	<div class="container container_logo">
-		<img src="img/logo.png" alt="logo" class="wow flipInX icon icon-logo">
+		<img src="img/logo.png" alt="logo" class="wow bounceInDown icon icon-logo js-logo">
 		<div class="links">
 			<table class="links__list">
 				<tbody>

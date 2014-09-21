@@ -145,12 +145,11 @@
 	animation-timing-function: ease-in-out;
 }
 
-.myFadeOut {
-	animation-name: myFadeOut;
-	animation-delay: 1s;
+.progressFadeOut {
+	animation-name: progressFadeOut;
 }
 
-@keyframes myFadeOut {
+@keyframes progressFadeOut {
 	0% {
 		opacity: 1;
 		visibility: visible;
@@ -161,6 +160,20 @@
 	}
 	100% {
 		opacity: 0;
+		visibility: hidden;
+	}
+}
+
+.myFadeOut {
+	animation-name: myFadeOut;
+	animation-delay: 6s;
+}
+
+@keyframes myFadeOut {
+	0% {
+		visibility: visible;
+	}
+	100% {
 		visibility: hidden;
 	}
 }
