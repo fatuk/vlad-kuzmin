@@ -144,3 +144,23 @@
 	animation-name: vladInRight;
 	animation-timing-function: ease-in-out;
 }
+
+.myFadeOut {
+	animation-name: myFadeOut;
+	animation-delay: 1s;
+}
+
+@keyframes myFadeOut {
+	0% {
+		opacity: 1;
+		visibility: visible;
+	}
+	99% {
+		opacity: 0;
+		visibility: visible;
+	}
+	100% {
+		opacity: 0;
+		visibility: hidden;
+	}
+}
