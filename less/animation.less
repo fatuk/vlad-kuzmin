@@ -96,3 +96,51 @@
 		background-position: -1576px;
 	}
 }
+
+@keyframes vladInUp {
+	0% {
+		opacity: 0;
+		transform: translate3d(0,800px,0);
+	}
+	100% {
+		opacity: 1;
+		transform: translate3d(0,0,0);
+	}
+}
+
+.vladInUp {
+	animation-name: vladInUp;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes vladInLeft {
+	0% {
+		opacity: 0;
+		transform: translate3d(200px,0,0);
+	}
+	100% {
+		opacity: 1;
+		transform: translate3d(0,0,0);
+	}
+}
+
+.vladInLeft {
+	animation-name: vladInLeft;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes vladInRight {
+	0% {
+		opacity: 0;
+		transform: translate3d(-200px,0,0);
+	}
+	100% {
+		opacity: 1;
+		transform: translate3d(0,0,0);
+	}
+}
+
+.vladInRight {
+	animation-name: vladInRight;
+	animation-timing-function: ease-in-out;
+}
