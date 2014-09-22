@@ -2199,6 +2199,9 @@ a {
   background: #73c6ee;
   /* Gecko Browsers */
 }
+body {
+  background: #000;
+}
 .hide {
   display: none;
 }
@@ -2266,8 +2269,6 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-transition: all 1.5s;
-          transition: all 1.5s;
   z-index: 100;
   overflow: hidden;
 }
@@ -2281,8 +2282,8 @@ a {
   display: inline-block;
   width: 100%;
   background: #ffffff;
-  -webkit-transition: -webkit-transform 2s;
-          transition: transform 2s;
+  -webkit-transition: -webkit-transform 0.4s;
+          transition: transform 0.4s;
   overflow: hidden;
 }
 .loading-fade__item_up {
@@ -2602,8 +2603,8 @@ a {
 .myFadeOut {
   -webkit-animation-name: myFadeOut;
           animation-name: myFadeOut;
-  -webkit-animation-delay: 6s;
-          animation-delay: 6s;
+  -webkit-animation-delay: 5.5s;
+          animation-delay: 5.5s;
 }
 @-webkit-keyframes myFadeOut {
   0% {
