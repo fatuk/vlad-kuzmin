@@ -2201,6 +2201,14 @@ a {
 }
 body {
   background: #000;
+  overflow: hidden;
+}
+a:focus,
+input:focus,
+button:focus,
+select:focus,
+textarea:focus {
+  outline: 0 !important;
 }
 .hide {
   display: none;
@@ -2838,6 +2846,9 @@ body {
 .arrow_right:before {
   right: 0;
 }
+.arrow_always {
+  z-index: 10000;
+}
 .socials {
   display: inline-block;
   margin-top: 5px;
@@ -3323,6 +3334,9 @@ body {
 .contacts__phone-text [href*="tel:"] {
   text-decoration: none;
 }
+.contacts__phone-text .textwidget {
+  display: inline-block;
+}
 .contacts__aim {
   float: left;
   position: relative;
@@ -3415,6 +3429,12 @@ body {
 }
 .news__item:nth-last-child(2) {
   margin-bottom: 0;
+}
+.news__item:nth-child(1) {
+  margin-bottom: 50px;
+}
+.news__item:nth-child(2) {
+  margin-bottom: 50px;
 }
 .news__item_archive {
   width: 80px;
@@ -3809,6 +3829,45 @@ body {
 .vlad__img {
   width: 656px;
   height: 847px;
+}
+.colorbox-overlay {
+  background: rgba(22, 22, 22, 0.9) !important;
+}
+#cboxContent {
+  margin-top: 0 !important;
+}
+.close-popup {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  cursor: pointer;
+  -webkit-transition: opacity .3s;
+          transition: opacity .3s;
+  z-index: 10001;
+}
+.close-popup:before {
+  content: '';
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 20;
+}
+.close-popup:hover {
+  opacity: .8;
+}
+.close-popup:hover .icon {
+  -webkit-animation-play-state: running;
+          animation-play-state: running;
+}
+.close-popup .icon {
+  -webkit-animation: close 1.8s steps(22) infinite;
+          animation: close 1.8s steps(22) infinite;
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
 }
 @media (max-width: 1200px) {
   .arrow {

@@ -15,14 +15,14 @@
 	<![endif]-->
 </head>
 <body>
-	<div class="loading-fade js-loadingFade" id="loadingFade">
+	{{! <div class="loading-fade js-loadingFade" id="loadingFade">
 		<ul class="loading-fade__list">
 			<li class="loading-fade__item loading-fade__item_up js-loadingItem js-loadingItemLogo"></li>
 			<li class="loading-fade__item loading-fade__item_down js-loadingItem"></li>
 		</ul>
-	</div>
+	</div> }}
 	<script>
-		Pace.on('done', function() {
+		/*Pace.on('done', function() {
 			var $loadingFade = $('#loadingFade');
 
 			$loadingFade.addClass('animated myFadeOut');
@@ -49,7 +49,7 @@
 			}, 4700);
 
 
-		});
+		});*/
 	</script>
 	<div class="hide">
 		{{>svg-icons}}

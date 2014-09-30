@@ -7,8 +7,10 @@ module.exports = {
         compress: false
     },
     build: {
-        files: {
+        files: [{
+            "../vlad.loc/wp-content/themes/vlad-kuzmin/css/main.css": "less/main.less"
+        }, {
             "css/main.css": "less/main.less"
-        }
+        }]
     }
 };
