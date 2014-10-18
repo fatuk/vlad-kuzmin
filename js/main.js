@@ -172,11 +172,6 @@ $(function() {
             });
 
             this.$('.js-scroll').perfectScrollbar();
-
-            setTimeout(function() {
-                // self.$('.js-framesContainer').prepend('<div class="color-overlay js-colorOverlay"></div>');
-            }, 3000);
-
         },
         setRoute: function(id) {
             router.navigate(App.Routes[id].route, {
@@ -381,14 +376,19 @@ $(function() {
             this.$('.js-videoSlider').fadeIn('fast');
         },
         showPhotoSlider: function() {
-            this.$('.js-photoSlider').fadeIn('fast');
+            this.$('.js-photoSlider').fadeIn('fast', function() {
+                console.log(photoSliderView.$('.js-sliderInner').width());
+                photoSliderView.$('.js-sliderContainer').css({
+                    'margin-left': (photoSliderView.$('.js-sliderInner').width() - photoSliderView.slideWidth) / 2
+                });
+            });
         }
     });
 
     // Slider view
 
     App.Views.Slider = Backbone.View.extend({
-        el: '.js-videoSlider',
+        el: '.js-photoSlider',
         events: {
             'click .js-slideLeft': 'prevSlide',
             'click .js-slideRight': 'nextSlide',
@@ -418,8 +418,14 @@ $(function() {
             $('body').on('keyup', function(e) {
                 self.escape(e);
             });
+
+            this.$('.js-slideArrow').show();
+            this.currentSlide = 5;
+            this.setActiveSlide(5);
         },
         setActiveSlide: function(slide) {
+            this.$('.js-sliderItem').removeClass('active');
+            this.$('.js-sliderItem[data-id="' + (slide + 1) + '"]').addClass('active');
             this.$('.js-sliderContainer').animate({
                 'left': -slide * this.slideWidth
             }, appView.animationSpeed);
@@ -878,10 +884,10 @@ $(function() {
         newsCollection = new App.Collections.News();
 
     var appView = new App.Views.App(),
-        videoSliderView = new App.Views.Slider(),
-        photoSliderView = new App.Views.Slider({
+        photoSliderView = new App.Views.Slider(),
+        /*      photoSliderView = new App.Views.Slider({
             el: '.js-photoSlider'
-        }),
+        }),*/
         tabsView = new App.Views.Tabs(),
         accordionView = new App.Views.Accordion(),
         galleryView = new App.Views.Gallery({
